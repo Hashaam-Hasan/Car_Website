@@ -1,0 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+    font-family: "Playfair Display", serif;
+}
+
+:root {
+    --main-color: #d30d0d;
+    --text-color: #141622;
+}
+
+/* Global Styles */
+html {
+    font-size: 68%; /* 1rem = 10px */
+}
+
+/*=== Top Header Section Start ===*/
+.top-header {
+    background-color: var(--main-color);
+}
+
+.out-box {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.inside-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text-color);
+    padding: 2rem 10rem;
+    clip-path: polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%);
+    color: #fff;
+}
+
+/* Columns Styling */
+.col-1, .col-2 {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.col-1 {
+    margin-right: 4rem;
+}
+
+.col-2 {
+    margin-left: auto;
+}
+
+/* Icon Styling */
+.icon-text {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+}
+
+.icon-text i {
+    color: var(--main-color);
+}
+
+.social i {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-left: 1.5rem;
+}
+
+.social i:hover {
+    color: var(--main-color);
+}
+
+/* Login/Register Hover Effect */
+.hover-red {
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.hover-red:hover {
+    color: var(--main-color);
+}
+
+
+
+/*=== Navbar Section Start ===*/
+.header {
+    width: 100%;
+    position: sticky;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.1rem 1%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5),
+                0 0 10px rgba(190, 190, 190, 0.5);
+    z-index: 111;
+    transition: 0.4s ease;
+}
+
+.header .sticky{
+    padding: 0 9.5%;
+}
+.header .logo img {
+    width: 120px;
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Navbar Links */
+nav .navbar ul li {
+    padding: 2rem 0.5rem;
+}
+
+nav .navbar ul li:hover,
+nav .Others i:hover {
+    color: var(--main-color);
+}
+
+nav .navbar .navlinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+nav .navbar .navlinks li a {
+    color: var(--text-color);
+    font-size: 1.7rem;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav .navbar ul li a:hover,
+nav .navbar ul li a:active {
+    color: var(--main-color);
+}
+
+/* Other Icons and Buttons */
+nav .Others {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    cursor: pointer;
+    gap: 1rem;
+}
+
+/* Add Listing Button */
+nav .others .addbtn {
+    color: #fff;
+    background: rgb(197, 0, 0); /* Make the button red */
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav .others .addbtn:hover {
+    background: black; /* Turn button black on hover */
+    color: #fff;
+}
+
+nav .others .addbtn i {
+    color: #fff; /* Icon color inside button */
+    padding-right: 0.5rem;
+}
+
+/* Icon Styling */
+nav .others i {
+    font-size: 1.7rem;
+    color: var(--text-color); /* Default icon color */
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+nav .others i:hover {
+    color: red; /* Icons turn red on hover */
+}
+
+/* Dropdown Container Styling */
+.navlinks li {
+    position: relative; /* Make each <li> position relative to position the dropdown */
+}
+
+.drop-down {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown directly below the menu item */
+    left: 0; /* Align dropdown with the left edge of the parent <li> */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    opacity: 0;
+    transform: scaleY(0.1);
+    transform-origin: top;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Show dropdown with animation on hover */
+.navlinks li:hover .drop-down {
+    display: block;
+    opacity: 1;
+    transform: scaleY(0.6); /* Ensure the dropdown fully scales to visible */
+}
+
+/* Styling for Dropdown Items */
+.drop-down li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem; /* Adjusted slightly smaller font for dropdown items */
+    line-height: 1;
+    border-bottom: 1px solid #e0e0e0;
+    opacity: 0;
+    transition: background-color 0.3s, transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Last item without bottom border */
+.drop-down li:last-child {
+    border-bottom: none;
+}
+
+/* Animate items into view */
+.navlinks li:hover .drop-down li {
+    opacity: 1;
+    transform: scaleX(1.1); /* Zoom in from left to right */
+}
+
+/* Anchor Tag Styling in Dropdown */
+.drop-down li a {
+    color: var(--text-color);
+    width: 10%;
+    text-decoration: none;
+    padding:  0 0.001px 0.1rem;
+    display: block;
+}
+
+/* Hover Effects for Dropdown Items */
+.drop-down li:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.05); /* Slight additional zoom on hover */
+    transition: transform 0.6s ease-in-out;
+}
+
+.drop-down li a:hover {
+    color: var(--main-color);
+}
+.drop-down li .drop-down-six,
+.drop-down li .drop-down-five,
+.drop-down li .drop-down-four,
+.drop-down li .drop-down-three,
+.drop-down li .drop-down-two{
+    width: 180px;
+    position: absolute;
+    top: 40px;
+    left: 140px;
+    margin-top: -3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: justify;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5);
+    padding: 1rem 0 0;
+    z-index: 111;
+    overflow: hidden;
+    display: none;
+}
+.drop-down li:hover .drop-down-six,
+.drop-down li:hover .drop-down-five,
+.drop-down li:hover .drop-down-four,
+.drop-down li:hover .drop-down-three,
+.drop-down li:hover .drop-down-two{
+    display: flex;
+}
+.drop-down li .chev{
+    position: absolute;
+    left: 105px;
+    top: 15px;
+    color: var(--text-color);
+}
+.drop-down li:hover .chev{
+    color: var(--main-color);
+}
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1b1b1b; /* Dark background */
+    color: #ffffff; /* White text for contrast */
+    font-family: Arial, sans-serif;
+}
+
+/* Marketplace Section */
+.marketplace {
+    padding: 2rem;
+    text-align: center;
+}
+
+.marketplace h1 {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #e63946; /* Red for heading */
+}
+
+/* Car List Styles */
+.car-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the grid */
+}
+
+/* Car Card Styles */
+.car-card {
+    background-color: #ffffff; /* White background for car cards */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.car-image img {
+    width: 100%;
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Cover image style */
+}
+
+/* Car Information Styles */
+.car-info {
+    padding: 1.5rem;
+    background-color: #f5f5f5; /* Light grey background for info */
+    color: #333; /* Dark text for readability */
+    text-align: left; /* Align text to the left */
+}
+
+.car-info h2 {
+    font-size: 1.8rem;
+    color: #e63946; /* Red for car titles */
+    margin-bottom: 0.5rem;
+}
+
+.car-info p {
+    font-size: 1rem;
+    color: #666; /* Grey text for details */
+    margin-bottom: 0.5rem;
+}
+
+/* Button Styles */
+.buy-button {
+    background-color: #e63946; /* Red button */
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: #b8313b; /* Darker red on hover */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #e63946; /* Red footer */
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem 0; /* Padding for footer */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5); /* Shadow effect for footer */
+}
+
+.footer p {
+    margin: 0;
+    font-size: 1rem;
+}

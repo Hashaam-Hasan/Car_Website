@@ -1,0 +1,890 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+    font-family: "Playfair Display", serif;
+}
+
+:root {
+    --main-color: #d30d0d;
+    --text-color: #141622;
+}
+
+/* Global Styles */
+html {
+    font-size: 68%; /* 1rem = 10px */
+}
+
+/*=== Top Header Section Start ===*/
+.top-header {
+    background-color: var(--main-color);
+}
+
+.out-box {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.inside-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text-color);
+    padding: 2rem 10rem;
+    clip-path: polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%);
+    color: #fff;
+}
+
+/* Columns Styling */
+.col-1, .col-2 {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.col-1 {
+    margin-right: 4rem;
+}
+
+.col-2 {
+    margin-left: auto;
+}
+
+/* Icon Styling */
+.icon-text {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffffff;
+}
+
+.icon-text i {
+    color: var(--main-color);
+}
+
+.social i {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-left: 1.5rem;
+}
+
+.social i:hover {
+    color: var(--main-color);
+}
+
+/* Login/Register Hover Effect */
+.hover-red {
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.hover-red:hover {
+    color: var(--main-color);
+}
+
+
+
+/*=== Navbar Section Start ===*/
+.header {
+    width: 100%;
+    position: sticky;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.1rem 1%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5),
+                0 0 10px rgba(190, 190, 190, 0.5);
+    z-index: 111;
+    transition: 0.4s ease;
+}
+
+.header .sticky{
+    padding: 0 9.5%;
+}
+.header .logo img {
+    width: 120px;
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Navbar Links */
+nav .navbar ul li {
+    padding: 2rem 0.5rem;
+}
+
+nav .navbar ul li:hover,
+nav .Others i:hover {
+    color: var(--main-color);
+}
+
+nav .navbar .navlinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+nav .navbar .navlinks li a {
+    color: var(--text-color);
+    font-size: 1.7rem;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav .navbar ul li a:hover,
+nav .navbar ul li a:active {
+    color: var(--main-color);
+}
+
+/* Other Icons and Buttons */
+nav .Others {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    cursor: pointer;
+    gap: 1rem;
+}
+
+/* Add Listing Button */
+nav .others .addbtn {
+    color: #fff;
+    background: rgb(197, 0, 0); /* Make the button red */
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav .others .addbtn:hover {
+    background: black; /* Turn button black on hover */
+    color: #fff;
+}
+
+nav .others .addbtn i {
+    color: #fff; /* Icon color inside button */
+    padding-right: 0.5rem;
+}
+
+/* Icon Styling */
+nav .others i {
+    font-size: 1.7rem;
+    color: var(--text-color); /* Default icon color */
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+nav .others i:hover {
+    color: red; /* Icons turn red on hover */
+}
+
+/* Dropdown Container Styling */
+.navlinks li {
+    position: relative; /* Make each <li> position relative to position the dropdown */
+}
+
+.drop-down {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align dropdown directly below the menu item */
+    left: 0; /* Align dropdown with the left edge of the parent <li> */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    opacity: 0;
+    transform: scaleY(0.1);
+    transform-origin: top;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Show dropdown with animation on hover */
+.navlinks li:hover .drop-down {
+    display: block;
+    opacity: 1;
+    transform: scaleY(0.6); /* Ensure the dropdown fully scales to visible */
+}
+
+/* Styling for Dropdown Items */
+.drop-down li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem; /* Adjusted slightly smaller font for dropdown items */
+    line-height: 1;
+    border-bottom: 1px solid #e0e0e0;
+    opacity: 0;
+    transition: background-color 0.3s, transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Last item without bottom border */
+.drop-down li:last-child {
+    border-bottom: none;
+}
+
+/* Animate items into view */
+.navlinks li:hover .drop-down li {
+    opacity: 1;
+    transform: scaleX(1.1); /* Zoom in from left to right */
+}
+
+/* Anchor Tag Styling in Dropdown */
+.drop-down li a {
+    color: var(--text-color);
+    width: 10%;
+    text-decoration: none;
+    padding:  0 0.001px 0.1rem;
+    display: block;
+}
+
+/* Hover Effects for Dropdown Items */
+.drop-down li:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.05); /* Slight additional zoom on hover */
+    transition: transform 0.6s ease-in-out;
+}
+
+.drop-down li a:hover {
+    color: var(--main-color);
+}
+.drop-down li .drop-down-six,
+.drop-down li .drop-down-five,
+.drop-down li .drop-down-four,
+.drop-down li .drop-down-three,
+.drop-down li .drop-down-two{
+    width: 180px;
+    position: absolute;
+    top: 40px;
+    left: 140px;
+    margin-top: -3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: justify;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5);
+    padding: 1rem 0 0;
+    z-index: 111;
+    overflow: hidden;
+    display: none;
+}
+.drop-down li:hover .drop-down-six,
+.drop-down li:hover .drop-down-five,
+.drop-down li:hover .drop-down-four,
+.drop-down li:hover .drop-down-three,
+.drop-down li:hover .drop-down-two{
+    display: flex;
+}
+.drop-down li .chev{
+    position: absolute;
+    left: 105px;
+    top: 15px;
+    color: var(--text-color);
+}
+.drop-down li:hover .chev{
+    color: var(--main-color);
+}
+/*---Home section start---*/
+/*---Home section start---*/
+.home .slide {
+    width: 100%;
+    height: 110vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15rem;
+}
+
+.home .slide.slide-one {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.8), rgb(172, 5, 5)), url("home1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .slide.slide-two {
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.8),rgba(20, 22, 34, 0.8), rgba(172, 5, 5, 0.8)), url("home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .slide.slide-three {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(25, 25, 25, 0.8), rgba(211, 13, 13, 0.75)), url("bg3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .slide .col-1 {
+    flex: 1 1 10rem;
+    color: #fff; /* Ensure text is visible against the background */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    text-align: center; /* Center text */
+    padding: 2rem; /* Add some padding for spacing */
+}
+
+/* Heading Styles */
+.home .slide .col-1 h4 {
+    font-size: 1.4rem; /* Slightly larger for better visibility */
+    color: var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* Increase letter spacing */
+    margin: 0; /* Remove default margin */
+    font-weight: 600; /* Semi-bold for a professional look */
+}
+
+/* Main Heading */
+.home .slide .col-1 h1 {
+    font-size: 3.5rem; /* Increase for emphasis */
+    margin: 0; /* Remove default margin */
+    font-weight: 700; /* Bold for importance */
+    line-height: 1.2; /* Space between lines */
+}
+
+/* Styling for 'dream' in main color */
+.home .slide .col-1 h1 span {
+    color: var(--main-color); /* Use main color for 'dream' */
+}
+
+/* Paragraph Styles */
+.home .slide .col-1 p {
+    font-size: 1.6rem; /* Increase font size for readability */
+    margin: 1rem 0; /* Space between elements */
+    white-space: normal; /* Allow wrapping */
+    line-height: 1.6; /* Improved line height for readability */
+    max-width: 600px; /* Limit width for better layout */
+    text-align: center; /* Center align for a professional touch */
+}
+
+/* Image Styling */
+.home .slide .col-2 {
+    /* Add a specific height for the column to control the image size */
+    height: 30rem; /* Adjust this value as needed for desired image height */
+    display: flex; /* Use flexbox to center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.home .slide .col-2 img {
+    width: auto; /* Allow the width to adjust automatically */
+    height: 100%; /* Set the height to 100% of the container's height */
+    max-height: none; /* Disable the max-height to allow height to be controlled by parent */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border-radius: 10px; /* Keep rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+
+/* Button Styles */
+.home .slide .button {
+    display: flex; /* Align buttons in a row */
+    justify-content: center; /* Center buttons */
+    gap: 1rem; /* Space between buttons */
+    margin-top: 2rem; /* Space above buttons */
+}
+
+.home .slide .button button {
+    padding: 0.75rem 1.5rem; /* Padding inside buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Font size for buttons */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    font-weight: 500; /* Medium weight for buttons */
+}
+
+/* About More Button */
+.home .slide .button .about {
+    background-color: var(--main-color); /* Main color for About More */
+    color: white; /* Text color */
+}
+
+/* Learn More Button */
+.home .slide .button .learn {
+    background-color: grey; /* Grey color for Learn More */
+    color: white; /* Text color */
+}
+
+/* Hover Effects */
+.home .slide .button button:hover {
+    background-color: black; /* Change background to black on hover */
+    color: white; /* Keep text color white on hover */
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 55%; /* Smaller font on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 50%; /* Further reduce font size for smaller screens */
+    }
+}
+
+/*=== Top Header Section Start ===*/
+.top-header {
+    background-color: var(--main-color);
+    padding: 0.5rem;
+}
+
+.out-box {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.inside-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text-color);
+    padding: 2rem 10rem;
+    clip-path: polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .inside-box {
+        padding: 1.5rem 5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .inside-box {
+        padding: 1rem 2rem;
+        flex-direction: column;
+    }
+}
+
+/* Columns Styling */
+.col-1,
+.col-2 {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .col-1 {
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .col-1 {
+        margin-right: 0;
+    }
+    .col-2 {
+        margin-left: 0;
+    }
+}
+
+/* Navbar Section Start */
+.header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5), 0 0 10px rgba(190, 190, 190, 0.5);
+    z-index: 111;
+    transition: 0.4s ease;
+}
+
+.header .logo img {
+    width: 100px;
+}
+
+@media (max-width: 768px) {
+    .header .logo img {
+        width: 80px;
+    }
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar .navlinks li a {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .navbar .navlinks li a {
+        font-size: 1.4rem;
+    }
+}
+
+/* Navbar Other Items */
+nav .others .addbtn {
+    font-size: 1.5rem;
+    padding: 0.7rem 1rem;
+}
+
+@media (max-width: 480px) {
+    nav .others .addbtn {
+        font-size: 1.3rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Dropdown Adjustments */
+.drop-down {
+    width: 140px;
+}
+
+@media (max-width: 768px) {
+    .drop-down {
+        width: 120px;
+    }
+}
+
+/* Home Section Adjustments */
+.home .slide {
+    height: 100vh;
+    padding: 0 5rem;
+}
+
+@media (max-width: 768px) {
+    .home .slide {
+        padding: 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .slide {
+        padding: 0 1.5rem;
+    }
+}
+
+/* Column Styles */
+.home .slide .col-1 h1 {
+    font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+    .home .slide .col-1 h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .slide .col-1 h1 {
+        font-size: 2rem;
+    }
+}
+
+.home .slide .col-1 p {
+    font-size: 1.4rem;
+}
+
+@media (max-width: 480px) {
+    .home .slide .col-1 p {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+}
+
+/* Image Adjustments */
+.home .slide .col-2 {
+    height: 25rem;
+}
+
+@media (max-width: 768px) {
+    .home .slide .col-2 {
+        height: 20rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .slide .col-2 {
+        display: none;
+    }
+}
+
+/* Button Adjustments */
+.home .slide .button button {
+    padding: 0.5rem 1.2rem;
+    font-size: 1.4rem;
+}
+
+@media (max-width: 480px) {
+    .home .slide .button button {
+        padding: 0.4rem 1rem;
+        font-size: 1.2rem;
+    }
+}
+.home .swiper [class^="swiper-button-"] {
+    color: #fff;
+    background: rgba(211, 13, 13, 0.5);
+    padding: 2.5rem;
+}
+.home .swiper [class^="swiper-button-"]:hover{
+    background: var(--main-color);
+}
+.home .swiper [class^="swiper-button-"]:before{
+    font-size: 2rem;
+}
+.search{
+    position: relative;
+    padding: 0 16rem;
+    background: #f7f2f2;
+}
+.search .find{
+    max-width: 1200px;
+    width:100%;
+    padding:2.5rem;
+    position: absolute;
+    top: -7rem;
+    right: 1.6rem;
+    z-index: 111;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(190, 190, 190, 0.5),0 0 10px rgba(190, 190, 190, 0.5);
+    overflow:hidden;
+}
+.find .find-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+}
+.find h3{
+    font-size: 2.7rem;
+    letter-spacing: 1px;
+    padding-bottom: 2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    font-family: "Poppins", sans-serif;
+}
+.find .find-row h4{
+    font-size: 1.7rem;
+    color: var(--text-color);
+    padding-bottom: 1.5rem;
+}
+
+.find .find-row select {
+    border: 1px solid #646161;
+    font-size: 1.5rem;
+    width: 200px;
+    font-weight: 500;
+    height: 45px;
+    padding: 0 1rem;
+    color: #646161;
+    font-family: "Poppins",sans-serif;
+}
+.find .find-row select option {
+    padding: 0.5rem;
+    border-radius: 1px solid #646161;
+}
+
+.search .search-btn button{
+    background: var(--main-color);
+    margin-top: 4rem;
+    padding: 1.3rem 2rem;
+    border-radius: 0.5rem;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.search.search-btn button i{
+    padding-right: 0.5rem;
+}
+.search .search-btn button:hover{
+    background: var(--text-color);
+}
+/* Marketplace Section Styles */
+section.market {
+    padding: 2.5rem 16rem;
+    background: #f7f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.market .col-3 {
+    flex: 1 1 20rem;
+    position: relative;
+    left:4rem;
+}
+
+
+.market .car-image {
+    width: 200%;
+    height: auto;
+    position: absolute;
+    bottom: -42rem;
+    left: -22rem;
+}
+
+.market .service {
+    position: absolute;
+    top: 10rem;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #141622;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.market .service-icon {
+    width: 40px;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+.market .service span {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.market .col-4 {
+    flex: 1 19 20rem;
+}
+
+.market .col-4 h4 {
+    color: #141622;
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 40rem;
+}
+
+.market .col-4 h3 {
+    color: #333;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.market .col-4 h3 span {
+    color: #e63946; /* Highlight color for 'Car' */
+}
+
+.market .description {
+    font-size: 1rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.market .features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #000000;
+}
+
+.market .features li {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.market .features li i {
+    color: #e63946; /* Icon color */
+    margin-right: 0.5rem;
+}
+
+.discover-more {
+    background-color: #e63946;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.discover-more:hover {
+    background-color: #b8313b;
+}
+/*====counter section start====*/
+.counter{
+    width:100%;
+    min-height: 50vh;
+    display: grid;
+    position: absolute;
+    left: -1px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    background: url(images.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.counter .container{
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.counter .container img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 0.5rem ;
+}
+.counter .container span.num {
+    padding: 1rem 0;
+    font-size: 4.6rem;
+    font-weight: 600;
+    color: #fff;
+    -webkit-text-stroke: 2px #000; /* Black outline around each letter */
+}
+
+.counter .container span.text {
+    padding-right: 0.5rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 500;
+    -webkit-text-stroke: 1px #000; /* Black outline around each letter */
+    padding: 0.5rem 1rem;
+}

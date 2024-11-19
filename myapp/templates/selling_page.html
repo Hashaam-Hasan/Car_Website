@@ -1,0 +1,208 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Car</title>
+    <link rel="stylesheet" href="car_sale.css"> <!-- Link to your CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons CDN Link -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <div class="top-header">
+        <div class="out-box">
+            <div class="inside-box">
+                <div class="col-1">
+                    <span class="icon-text"><i class="bx bxl-gmail"></i> info@gmail.com</span>
+                    <span class="icon-text"><i class="bx bx-phone-call"></i> 0332-1234567</span>
+                    <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
+                </div>
+                <div class="col-2">
+                    <a href="#" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
+                    <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a>
+                    <span>Follow us:</span>
+                    <div class="social">
+                        <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
+                        <a href="#"><i class="bx bxl-instagram"></i></a>
+                        <a href="#"><i class="bx bxl-twitter"></i></a>
+                        <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Section Start -->
+    <header class="header">
+        <div class="logo">
+            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png" %}' alt="Smash Car Experts Logo">
+        </div>
+        <nav>
+            <div class="navbar">
+                <ul class="navlinks">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Market Place</a></li>
+                    <li><a href="#">Pages <i class="bx bx-chevron-down chev"></i></a>
+                        <ul class="drop-down">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Car Listing <i class="bx bx-chevron-down chev"></i></a>
+                                <ul class="drop-down-two">
+                                    <li><a href="#">Listing Grid</a></li>
+                                    <li><a href="#">Listing List</a></li>
+                                    <li><a href="#">Listing Single</a></li>
+                                    <li><a href="#">Compare</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Account</a></li>
+                            <li><a href="#">My Account <i class="bx bx-chevron-down chev"></i></a>
+                                <ul class="drop-down-three">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">My Profile</a></li>
+                                    <li><a href="#">My Listing</a></li>
+                                    <li><a href="#">Add Listing</a></li>
+                                    <li><a href="#">My Favourites</a></li>
+                                    <li><a href="#">Messages</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Authentication <i class="bx bx-chevron-down chev"></i></a>
+                                <ul class="drop-down-four">
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">Register</a></li>
+                                    <li><a href="#">Forgot Password</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Service <i class="bx bx-chevron-down chev"></i></a>
+                                <ul class="drop-down-five">
+                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">Services Single</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Dealer <i class="bx bx-chevron-down chev"></i></a>
+                                <ul class="drop-down-six">
+                                    <li><a href="#">Dealer</a></li>
+                                    <li><a href="#">Dealer Single</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Extra Pages</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Pricing Plan</a></li>
+                            <li><a href="#">Calculator</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Shop <i class="bx bx-chevron-down chev"></i></a>
+                        <ul class="drop-down">
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Shop Cart</a></li>
+                            <li><a href="#">Shop Checkout</a></li>
+                            <li><a href="#">Shop Single</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Blog <i class="bx bx-chevron-down chev"></i></a>
+                        <ul class="drop-down">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Blog Single</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>               
+            <div class="others">
+                <i class="bx bx-search"></i>
+                <i class="bx bx-cart-download"></i>
+                <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
+                <i class="bx bx-menu"></i>
+            </div>
+        </nav>
+    </header>
+        <!-- Bubble icon for menu -->
+    <div class="menu-bubble" id="menu-bubble1">
+        <i class="bx bx-menu" id="menu-btn1"></i>
+    </div>
+    
+    <div class="navbar1">
+            <h2>Menu</h2>
+            <ul>
+                <li>Cars Purchased</li>
+                <li>Favourite Cars</li>
+                <li>Cars Enlisted</li>
+                <li>Cars Sold</li>
+            </ul>
+            <button class="logout">Logout</button>
+    </div>
+    
+    <div class="container">
+            <h1>List Your Car</h1>
+            <form id="car-form">
+                <label for="title">Car Title:</label>
+                <input type="text" id="title" name="title" required>
+    
+                <label for="BrandName">BrandName:</label>
+                <input type="BrandName" id="BrandName" name="BrandName" required>
+                
+                <label for="Car-Model">Car-Model:</label>
+                <input type="Car-Model" name="Car-Model" id="car-Model" required>
+                
+                <label for="Model(Year)">Model(Year):</label>
+                <input id="Model(Year)" name="Model(Year)" type="Model(Year)" required></textarea>
+                
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+                
+                <label for="Milage">Milage</label>
+                <input type="Milage" id="Milage" name="Milage" required>
+
+                <label for="Body-Type">Body-Type</label>
+                <input type="Body-Type" id="Body-Type" name="Body-Type" required>
+
+
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+    
+                <button type="submit">Submit</button>
+            </form>
+    </div>
+
+    
+
+
+</body>
+</html>
+<script>
+    const menuBubble = document.getElementById('menu-bubble1');
+    const navbar = document.querySelector('.navbar1');
+    const menuBtn = document.getElementById('menu-btn1');
+
+    // Function to toggle sidebar visibility and bubble
+    function toggleSidebar() {
+        navbar.classList.toggle('active');
+        menuBubble.classList.toggle('hidden'); // Toggle bubble visibility
+    }
+
+    // Show menu on bubble click
+    menuBubble.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent click event from bubbling up
+        toggleSidebar();
+    });
+
+    // Show menu on button click
+    menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent click event from bubbling up
+        toggleSidebar();
+    });
+
+    // Hide menu if clicking outside of it
+    document.addEventListener('click', function (e) {
+        // Check if the click was outside the navbar and the bubble
+        if (!navbar.contains(e.target) && !menuBubble.contains(e.target)) {
+            navbar.classList.remove('active'); // Hide the sidebar
+            menuBubble.classList.remove('hidden'); // Show the bubble again
+        }
+    });
+</script>
