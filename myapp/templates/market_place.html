@@ -52,11 +52,11 @@
             <div class="navbar">
                 <ul class="navlinks">
                     <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Market Place</a></li>
-                    <li><a href="#">Pages <i class="bx bx-chevron-down chev"></i></a>
-                        <ul class="drop-down">
-                            <li><a href="#">About</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}">Market Place</a></li>
+                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
+                        <!-- <ul class="drop-down">
+                            <li><a href=#>About</a></li>
                             <li><a href="#">Car Listing <i class="bx bx-chevron-down chev"></i></a>
                                 <ul class="drop-down-two">
                                     <li><a href="#">Listing Grid</a></li>
@@ -102,29 +102,30 @@
                             <li><a href="#">Calculator</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Testimonials</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li><a href="#">Shop <i class="bx bx-chevron-down chev"></i></a>
-                        <ul class="drop-down">
+                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a>
+                        <!-- <ul class="drop-down">
                             <li><a href="#">Shop</a></li>
                             <li><a href="#">Shop Cart</a></li>
                             <li><a href="#">Shop Checkout</a></li>
                             <li><a href="#">Shop Single</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li><a href="#">Blog <i class="bx bx-chevron-down chev"></i></a>
-                        <ul class="drop-down">
+                    <li><a href="{% url 'about_us' %}">Blog <i></i></a>
+                        <!-- <ul class="drop-down">
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Blog Single</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'contribution' %}">Contact</a></li>
                 </ul>
             </div>               
             <div class="others">
                 <i class="bx bx-search"></i>
                 <i class="bx bx-cart-download"></i>
                 <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
+                <i class="bx bx-menu" id="menu-btn"></i>
             </div>
         </nav>
     </header>

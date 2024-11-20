@@ -22,5 +22,8 @@ urlpatterns = [
     path('marketplace/', views.market_place, name='market_place'),
     path('selling/', views.selling_page, name='selling_page'),
     path('account/', views.user_account_page, name='user_account_page'),
+    path('about/', views.about_us, name= 'about_us'),
+    path('contribution', views.contribution, name= 'contribution'),
+    path('login', views.login, name = 'login')
 ]
 

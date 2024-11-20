@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- <link rel="stylesheet" href="about.css"> -->
+</head>
+<body>
+    <section class="section__container experience__container" id="about">
+        <div class="experience__image">
+          <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\experience1.jpg" %}' alt="experience" />
+        </div>
+        <div class="experience__content">
+          <p class="section__subheader">WHO WE ARE</p>
+          <h1 class="section__header">
+            We Have 25 Years Of Experience In This Industry
+          </h1>
+          <p class="section__description">
+            With a rich legacy spanning 25 years, our commitment to excellence in
+            car servicing is unwavering. Our seasoned team brings a wealth of
+            experience to ensure your vehicle receives top-notch care. Trust in
+            our expertise to keep your car running smoothly and safely...
+          </p>
+          <a href="cont.html"><button class="btn">Read More</button></a>
+        </div>
+      </section>
+</body>
+</html>

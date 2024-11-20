@@ -1,0 +1,123 @@
+    /* Container to create the two-column layout */
+.experience__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    gap: 3rem; /* Increased space between image and content */
+    align-items: center; /* Center content vertically */
+    padding: 3rem; /* Larger padding for spacing */
+    background-color: #f9f9f9; /* Light background color for the section */
+    border-radius: 10px; /* Rounded corners for the container */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Hide overflowing content */
+    transition: transform 0.5s ease-in-out; /* Smooth transform effect */
+}
+
+/* Hover effect for the entire container */
+.experience__container:hover {
+    transform: translateY(-10px); /* Lift the container on hover */
+}
+
+/* Style for the image to control max-width and auto margin */
+.experience__image img {
+    max-width: 100%; /* Ensure image scales within its grid area */
+    height: auto;
+    display: block;
+    border-radius: 8px; /* Rounded corners for the image */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow on image */
+    transition: transform 0.4s ease; /* Smooth zoom effect */
+}
+
+/* Zoom effect on image hover */
+.experience__image img:hover {
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Center content within its column */
+.experience__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Style for 'WHO WE ARE' text */
+.experience__content .section__subheader {
+    color: #ff6347; /* Warm red color */
+    font-size: 1.8rem; 
+    font-weight: bold;
+    margin-bottom: 0.5rem; 
+    letter-spacing: 1px; /* Slightly spaced letters for elegance */
+    text-transform: uppercase; /* Uppercase text for emphasis */
+    opacity: 0.9;
+    transition: opacity 0.3s ease; /* Transition effect for opacity */
+}
+
+/* Hover effect for the subheader */
+.experience__content .section__subheader:hover {
+    opacity: 1;
+}
+
+/* Style for 'We Have 25 Years Of Experience' heading */
+.experience__content .section__header {
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: bold;
+    margin-top: 0.5rem; 
+    margin-bottom: 1rem;
+    color: #333; /* Dark color for strong contrast */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+    line-height: 1.3;
+}
+
+/* Styling for the description */
+.experience__content .section__description {
+    font-size: 1.1rem; 
+    margin-top: 1rem;
+    line-height: 1.8;
+    color: #666;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style for the 'Read More' button */
+.btn {
+    background-color: #ff6347; /* Warm red color */
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.75rem 2rem; /* Larger padding for a more clickable button */
+    border: none;
+    border-radius: 30px; /* Rounded button */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    margin-top: 1.5rem; /* Space above button */
+}
+
+/* Hover effect for the button */
+.btn:hover {
+    background-color: #e55347; /* Darker shade of red on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Optional: Add a gradient to the button */
+.btn {
+    background: linear-gradient(45deg, #ff6347, #ff2a68);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .experience__container {
+        grid-template-columns: 1fr; /* Stack the columns on smaller screens */
+        padding: 2rem; /* Adjust padding */
+    }
+
+    /* Reduce font size for smaller screens */
+    .experience__content .section__header {
+        font-size: 2rem;
+    }
+
+    .experience__content .section__subheader {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1.5rem; /* Smaller padding for buttons on smaller screens */
+    }
+}

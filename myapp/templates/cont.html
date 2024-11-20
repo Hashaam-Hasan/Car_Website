@@ -1,0 +1,90 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/cont.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribution Page</title>
+    
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Link to your custom CSS -->
+    <!-- <link rel="stylesheet" href="cont.css"> -->
+</head>
+<body>
+    <section class="team">
+        <div class="container">
+            <h1>OUR TEAM</h1>
+            <div class="row">
+                <div class="col-md-3 profile text-center">
+                    <div class="img-box">
+                        <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\member2.jpeg" %}' class="img-responsive">
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#"><i class="bi bi-linkedin"></i></a></li>                            
+                        </ul>
+                    </div>
+                    <h2>SHAYAN HUSSAIN</h2>
+                    <h3>Founder / CEO</h3>
+                    <p class="role-description">
+                        Shayan is the visionary behind our company's growth. He has led the team through every major decision, ensuring strategic direction and long-term success. His leadership has been instrumental in building a strong foundation for the company.
+                    </p>
+                </div>
+                <div class="col-md-3 profile text-center">
+                    <div class="img-box">
+                        <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\member4.jpeg" %}' class="img-responsive">
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <h2>ALI</h2>
+                    <h3>BUSINESS HEAD</h3>
+                    <p class="role-description">
+                        Ali's expertise in business strategy and operations has helped us grow and adapt to market demands. He oversees the day-to-day operations and plays a key role in developing partnerships that drive business growth.
+                    </p>
+                </div>
+                <div class="col-md-3 profile text-center">
+                    <div class="img-box">
+                        <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\member3.jpg" %}' class="img-responsive">
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <h2>HASHAAM HASAN</h2>
+                    <h3>LEAD DEVELOPER</h3>
+                    <p class="role-description">
+                        Hashaam is the driving force behind our software development projects. His exceptional programming skills, strategic problem-solving, and leadership have consistently delivered innovative solutions. As a lead developer, Hashaam ensures the seamless execution of projects, mentors the team, and drives excellence in every aspect of development, earning widespread appreciation from clients and colleagues alike.
+                    </p>
+                </div>
+                <div class="col-md-3 profile text-center">
+                    <div class="img-box">
+                        <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\member1.jpeg" %}' class="img-responsive">
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <h2>ABDUL MOIZ</h2>
+                    <h3>MARKETING HEAD</h3>
+                    <p class="role-description">
+                        Abdul Moiz is responsible for the marketing strategies that have helped our company gain visibility and customer trust. His work in creating impactful campaigns has been pivotal in attracting new clients and retaining existing ones.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Link to Bootstrap JS (optional but for interactivity like modals, dropdowns, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

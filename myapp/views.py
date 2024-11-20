@@ -15,3 +15,12 @@ def selling_page(request):
 # User Account Page
 def user_account_page(request):
     return render(request, 'user_account_page.html')
+
+def about_us(request):
+    return render(request,'about.html')
+
+def contribution(request):
+    return render(request, 'cont.html')
+
+def login(request):
+    return render(request, 'login.html')
