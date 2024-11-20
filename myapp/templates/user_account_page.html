@@ -1,5 +1,6 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'css/user_account_page' %}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,8 @@
     <title>SMASH CAR EXPERTS</title>
 
     <!-- Customer CSS File -->
-    <link rel="stylesheet" href="market_place.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <link rel="stylesheet" href="User_Account_Page.css"> Link to your CSS -->
     <!-- Boxicons CDN Link -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <!-- Swiper CSS Links -->
@@ -28,8 +30,6 @@
                     <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
                 </div>
                 <div class="col-2">
-                    <a href="#" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
-                    <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a>
                     <span>Follow us:</span>
                     <div class="social">
                         <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
@@ -45,14 +45,14 @@
     <!-- Navbar Section Start -->
     <header class="header">
         <div class="logo">
-            <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png' %}" alt="Smash Car Experts Logo">
+            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png" %}' alt="Smash Car Experts Logo">
         </div>
         <nav>
             <div class="navbar">
                 <ul class="navlinks">
                     <li><a href="#" class="active">Home</a></li>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Market Place</a></li>
+                    <li><a href="#">Market Place </a></li>
                     <li><a href="#">Pages <i class="bx bx-chevron-down chev"></i></a>
                         <ul class="drop-down">
                             <li><a href="#">About</a></li>
@@ -124,87 +124,98 @@
                 <i class="bx bx-search"></i>
                 <i class="bx bx-cart-download"></i>
                 <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
+                <i class="bx bx-menu" id="menu-btn"></i>
             </div>
         </nav>
     </header>
-    <main class="marketplace">
-        <h1>Welcome to the Marketplace</h1>
-        <div class="car-list" id="carList">
-            <!-- Car cards will be dynamically inserted here -->
+           <!-- Bubble icon for menu -->
+           <div class="menu-bubble" id="menu-bubble1">
+            <i class="bx bx-menu" id="menu-btn1"></i>
         </div>
-    </main>
+        
+        <div class="navbar1">
+                <h2>Menu</h2>
+                <ul>
+                    <li>Cars Purchased</li>
+                    <li>Favourite Cars</li>
+                    <li>Cars Enlisted</li>
+                    <li>Cars Sold</li>
+                </ul>
+                <button class="logout">Logout</button>
+        </div>
+        <div class="account-container">
+            <!-- User Information Section -->
+            <div class="user-info">
+                <h2 class="user-name" id="user-name"></h2>
+                <p class="user-bio" id="user-bio"></p>
+                <p class="user-email" id="user-email"></p>
+                <p class="user-phone" id="user-phone"></p>
+            </div>
+    
+            <!-- Profile Image Section -->
+            <div class="profile-img-section">
+                <img src="" alt="User Profile Image" id="profile-img" class="profile-img">
+            </div>
+        </div>
+        <!-- Button Section -->
+        <div class="button-section">
+            <a href="market-place.html"><button class="action-button buy-button" >Buy a Car</button></a>
+            <a href="selling_page.html"><button class="action-button sell-button">Sell a Car</button></a>
+        </div>  
 
-    <footer class="footer">
-        <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
-    </footer>
-</body>
+
+    </body>
 </html>
 <script>
-    // Sample car data to simulate API response
-const carData = [
-    {
-        id: 1,
-        make: "Toyota",
-        model: "Camry",
-        year: 2020,
-        image: "https://example.com/toyota_camry.jpg",
-        price: 24000,
-    },
-    {
-        id: 2,
-        make: "Honda",
-        model: "Accord",
-        year: 2021,
-        image: "https://example.com/honda_accord.jpg",
-        price: 26000,
-    },
-    {
-        id: 3,
-        make: "Ford",
-        model: "Mustang",
-        year: 2019,
-        image: "https://example.com/ford_mustang.jpg",
-        price: 30000,
-    },
-];
+    const menuBubble = document.getElementById('menu-bubble1');
+    const navbar = document.querySelector('.navbar1');
+    const menuBtn = document.getElementById('menu-btn1');
 
-// Function to display car listings
-function displayCars(cars) {
-    const carList = document.getElementById('carList');
-    carList.innerHTML = ''; // Clear previous listings
+    // Function to toggle sidebar visibility and bubble
+    function toggleSidebar() {
+        navbar.classList.toggle('active');
+        menuBubble.classList.toggle('hidden'); // Toggle bubble visibility
+    }
 
-    cars.forEach(car => {
-        const carCard = document.createElement('div');
-        carCard.className = 'car-card';
-        carCard.innerHTML = `
-            <div class="car-image">
-                <img src="${car.image}" alt="${car.make} ${car.model}">
-            </div>
-            <div class="car-info">
-                <h2>${car.make} ${car.model}</h2>
-                <p>Year: ${car.year}</p>
-                <p>Brand Name: $${car.price}</p>
-                <p>Car Model: $${car.price}</p>
-                <p>All Years: $${car.price}</p>
-                <p>Choose Milage: $${car.price}</p>
-                <p>Price: $${car.price}</p>
-                <p>Body Type: $${car.price}</p>
-                <button class="buy-button">Buy</button>
-            </div>
-        `;
-        carList.appendChild(carCard);
+    // Show menu on bubble click
+    menuBubble.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent click event from bubbling up
+        toggleSidebar();
     });
-}
 
-// Fetch car data (simulating an API call)
-function fetchCarData() {
-    // Simulating network request
-    setTimeout(() => {
-        displayCars(carData);
-    }, 500);
-}
+    // Show menu on button click
+    menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent click event from bubbling up
+        toggleSidebar();
+    });
 
-// Initialize the app
-document.addEventListener('DOMContentLoaded', fetchCarData);
+    // Hide menu if clicking outside of it
+    document.addEventListener('click', function (e) {
+        // Check if the click was outside the navbar and the bubble
+        if (!navbar.contains(e.target) && !menuBubble.contains(e.target)) {
+            navbar.classList.remove('active'); // Hide the sidebar
+            menuBubble.classList.remove('hidden'); // Show the bubble again
+        }
+    });
+    // Fetch user data and update UI
+    async function loadUserData() {
+        try {
+            const response = await fetch('/api/user'); // Replace with your API endpoint
+            const userData = await response.json();
+
+            // Update HTML elements with user data
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('user-bio').textContent = userData.bio;
+            document.getElementById('user-email').textContent = `📧 ${userData.email}`;
+            document.getElementById('user-phone').textContent = `📞 ${userData.phone}`;
+            document.getElementById('profile-img').src = userData.profileImage || 'default-profile.jpg';
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    }
+
+    // Run the function on page load
+    document.addEventListener('DOMContentLoaded', loadUserData);
 
 </script>
+
