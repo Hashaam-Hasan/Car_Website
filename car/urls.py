@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  # include is used to connect app urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel URL
     path('', include('myapp.urls')),  # Connects URLs from myapp
+    path('', include('register.urls')), 
+    # path('listings/', include('listings.urls')),    
 ]
 
+# Add this line to serve media files during development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

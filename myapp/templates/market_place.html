@@ -7,9 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMASH CAR EXPERTS</title>
-
-    <!-- Customer CSS File -->
-    <!-- <link rel="stylesheet" href="market_place.css"> -->
     <!-- Boxicons CDN Link -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <!-- Swiper CSS Links -->
@@ -17,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token }}">
 </head>
 <body>
     <!-- Top Header -->
@@ -54,70 +52,9 @@
                     <li><a href="#" class="active">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'market_place' %}">Market Place</a></li>
-                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href=#>About</a></li>
-                            <li><a href="#">Car Listing <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-two">
-                                    <li><a href="#">Listing Grid</a></li>
-                                    <li><a href="#">Listing List</a></li>
-                                    <li><a href="#">Listing Single</a></li>
-                                    <li><a href="#">Compare</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Account</a></li>
-                            <li><a href="#">My Account <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-three">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">My Listing</a></li>
-                                    <li><a href="#">Add Listing</a></li>
-                                    <li><a href="#">My Favourites</a></li>
-                                    <li><a href="#">Messages</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Authentication <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-four">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
-                                    <li><a href="#">Forgot Password</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Service <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-five">
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Services Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dealer <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-six">
-                                    <li><a href="#">Dealer</a></li>
-                                    <li><a href="#">Dealer Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Extra Pages</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Pricing Plan</a></li>
-                            <li><a href="#">Calculator</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Shop Cart</a></li>
-                            <li><a href="#">Shop Checkout</a></li>
-                            <li><a href="#">Shop Single</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'about_us' %}">Blog <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Blog Single</a></li>
-                        </ul> -->
-                    </li>
+                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a></li>
+                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a></li>
+                    <li><a href="{% url 'about_us' %}">Blog <i></i></a></li>
                     <li><a href="{% url 'contribution' %}">Contact</a></li>
                 </ul>
             </div>               
@@ -131,11 +68,34 @@
     </header>
     <main class="marketplace">
         <h1>Welcome to the Marketplace</h1>
-        <div class="car-list" id="carList">
-            <!-- Car cards will be dynamically inserted here -->
+        <div class="car-list">
+            {% for car in cars %}
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="{{ car.image.url }}" alt="{{ car.title }}">
+                </div>
+                <div class="car-info">
+                    <h2>{{ car.title }}</h2>
+                    <p>Brand Name: {{ car.brand_name }}</p>
+                    <p>Car Model: {{ car.car_model }}</p>
+                    <p>Year: {{ car.model_year }}</p>
+                    <p>Mileage: {{ car.mileage }} km</p>
+                    <p>Body Type: {{ car.body_type }}</p>
+                    <p>Price: ${{ car.price }}</p>
+                     <!-- Heart icon -->
+                    <button class="favorite-button" data-car-id="{{ car.id }}">
+                        <i class="bx bx-heart" id="heart-icon-{{ car.id }}"></i>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            
+
+
+
+            
         </div>
     </main>
-
     <footer class="footer">
         <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
     </footer>
@@ -208,5 +168,35 @@ function fetchCarData() {
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', fetchCarData);
+
+</script>
+
+<script>
+    document.querySelectorAll('.favorite-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const carId = this.getAttribute('data-car-id');
+
+            // Get the CSRF token from the meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch(`/favorites/${carId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken, // Include CSRF token here
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const icon = document.getElementById(`heart-icon-${carId}`);
+                if (data.favorited) {
+                    icon.classList.replace('bx-heart', 'bx-heart-fill');
+                } else {
+                    icon.classList.replace('bx-heart-fill', 'bx-heart');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
 
 </script>

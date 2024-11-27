@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp'
+    'myapp',
+    'register',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'car.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,10 +77,17 @@ WSGI_APPLICATION = 'car.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'car',       # Database name
+        'USER': 'root',        # Username
+        'PASSWORD': 'shayan',    # Password
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
+
+
 
 
 # Password validation
@@ -116,7 +124,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+
+# Media configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -129,3 +143,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'myapp/static',  # Adjust the path to your app's static directory
 ]
 
+# settings.py
+LOGIN_REDIRECT_URL = ''  # Redirect to the home page after login
+LOGOUT_REDIRECT_URL = 'login'  # Redirect to the login page after logout

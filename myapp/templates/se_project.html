@@ -30,8 +30,8 @@
                     <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
                 </div>
                 <div class="col-2">
-                    <a href="#" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
-                    <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a>
+                    <a href="{% url 'login' %}" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
+                    <!-- <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a> -->
                     <span>Follow us:</span>
                     <div class="social">
                         <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
@@ -52,7 +52,7 @@
         <nav>
             <div class="navbar">
                 <ul class="navlinks">
-                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="landing_page" class="active">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'market_place' %}">Market Place</a></li>
                     <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
@@ -121,13 +121,15 @@
                     </li>
                     <li><a href="{% url 'contribution' %}">Contact</a></li>
                 </ul>
-            </div>               
+            </div>       
+
             <div class="others">
                 <i class="bx bx-search"></i>
                 <i class="bx bx-cart-download"></i>
                 <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
                 <i class="bx bx-menu" id="menu-btn"></i>
             </div>
+            
         </nav>
     </header>
 

@@ -43,7 +43,7 @@
         <nav>
             <div class="navbar">
                 <ul class="navlinks">
-                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="{% url 'landing_page' %}" class="active">Home</a></li>
                     <li><a href="{% url 'about_us' %}">About</a></li>
                     <li><a href="{% url 'market_place' %}">Market Place</a></li>
                     <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
@@ -121,50 +121,39 @@
             </div>
         </nav>
     </header>
-        <!-- Bubble icon for menu -->
-    <div class="menu-bubble" id="menu-bubble1">
-        <i class="bx bx-menu" id="menu-btn1"></i>
-    </div>
     
-    <div class="navbar1">
-            <h2>Menu</h2>
-            <ul>
-                <li>Cars Purchased</li>
-                <li>Favourite Cars</li>
-                <li>Cars Enlisted</li>
-                <li>Cars Sold</li>
-            </ul>
-            <button class="logout">Logout</button>
+    <!-- Hovering Fun Bubble Button -->
+    <div class="fun-menu-bubble" id="fun-menu-bubble">
+        <button style="position: fixed; bottom: 20px; right: 20px; 
+                    background-color: #ff3b3b; border-radius: 50%; 
+                    border: none; padding: 15px; font-size: 2rem; 
+                    cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                    transition: transform 0.3s ease;">
+
+            <i class="bx bxs-smiley" style="font-size: 30px;"></i> <!-- Smiley Icon -->
+        </button>
     </div>
+
+
+
+
+    
+    <!-- <div class="navbar1"> -->
+            <!-- <h2>Menu</h2> -->
+            <!-- <ul> -->
+                <!-- <li>Cars Purchased</li> -->
+                <!-- <li>Favourite Cars</li> -->
+                <!-- <li>Cars Enlisted</li> -->
+                <!-- <li>Cars Sold</li> -->
+            <!-- </ul> -->
+            <!-- <button class="logout">Logout</button> -->
+    <!-- </div> -->
     
     <div class="container">
             <h1>List Your Car</h1>
-            <form id="car-form">
-                <label for="title">Car Title:</label>
-                <input type="text" id="title" name="title" required>
-    
-                <label for="BrandName">BrandName:</label>
-                <input type="BrandName" id="BrandName" name="BrandName" required>
-                
-                <label for="Car-Model">Car-Model:</label>
-                <input type="Car-Model" name="Car-Model" id="car-Model" required>
-                
-                <label for="Model(Year)">Model(Year):</label>
-                <input id="Model(Year)" name="Model(Year)" type="Model(Year)" required></textarea>
-                
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" required>
-                
-                <label for="Milage">Milage</label>
-                <input type="Milage" id="Milage" name="Milage" required>
-
-                <label for="Body-Type">Body-Type</label>
-                <input type="Body-Type" id="Body-Type" name="Body-Type" required>
-
-
-                <label for="image">Upload Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
-    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
                 <button type="submit">Submit</button>
             </form>
     </div>

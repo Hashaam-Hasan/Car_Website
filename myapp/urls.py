@@ -18,12 +18,28 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.se_project, name='se_project'),  # Landing page
+    # Web pages
+    path('', views.se_project, name='landing_page'),  # Landing page URL
+    # path('login/', views.login_view, name='login'),
+    # path('', views.se_project, name='se_project'),  # Landing page
     path('marketplace/', views.market_place, name='market_place'),
     path('selling/', views.selling_page, name='selling_page'),
     path('account/', views.user_account_page, name='user_account_page'),
     path('about/', views.about_us, name= 'about_us'),
     path('contribution', views.contribution, name= 'contribution'),
-    path('login', views.login, name = 'login')
+    # # Ye sara login page ka kaam
+    # path('login/', views.login_view, name='login'),
+    # path('signup/', views.signup_view, name='signup'),
+
+
+
+    path('favorites/<int:car_id>/', views.toggle_favorite, name='toggle_favorite'),
+    path('user/favorites/', views.favorite_cars, name='favorite_cars'),
+
+    
+    # path('list_car/', views.list_car, name='list_car'),
+    # path('success/', views.success, name='success'),
+
+
 ]
 
