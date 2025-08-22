@@ -1,0 +1,196 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css\car_search.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Search Results</title>
+    <style>
+        /* Page styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Car Search Results</h1>
+    <div class="container">
+        <div id="results">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Mileage</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be inserted dynamically -->
+                </tbody>
+            </table>
+            <div id="no-results" class="no-results" style="display: none;">
+                No cars found matching your search.
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // Sample data for demonstration
+        const carData = [
+            { title: "BMW X5", brand: "BMW", model: "X5", year: 2022, mileage: 15000, price: 60000 },
+            { title: "Ferrari 488", brand: "Ferrari", model: "488", year: 2021, mileage: 8000, price: 250000 },
+            { title: "Hyundai Sonata", brand: "Hyundai", model: "Sonata", year: 2020, mileage: 30000, price: 20000 },
+            { title: "Nissan Altima", brand: "Nissan", model: "Altima", year: 2019, mileage: 40000, price: 18000 },
+        ];
+
+        // Extract query from URL
+        function getQueryParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Perform search based on query parameter
+        function performSearch() {
+            const query = getQueryParameter('query')?.toLowerCase();
+            const resultsTable = document.getElementById("results-table").querySelector("tbody");
+            const noResultsMessage = document.getElementById("no-results");
+
+            // Clear previous results
+            resultsTable.innerHTML = "";
+
+            if (!query) {
+                noResultsMessage.style.display = "block";
+                return;
+            }
+
+            // Filter cars based on the query
+            const filteredCars = carData.filter(car => car.title.toLowerCase().includes(query));
+
+            if (filteredCars.length > 0) {
+                noResultsMessage.style.display = "none";
+
+                filteredCars.forEach(car => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${car.title}</td>
+                        <td>${car.brand}</td>
+                        <td>${car.model}</td>
+                        <td>${car.year}</td>
+                        <td>${car.mileage} km</td>
+                        <td>$${car.price}</td>
+                    `;
+                    resultsTable.appendChild(row);
+                });
+            } else {
+                noResultsMessage.style.display = "block";
+            }
+        }
+
+        // Trigger search on page load
+        window.onload = performSearch;
+    </script>
+</body>
+</html>
+
+
+
+<script>
+    // Perform search based on query parameter
+    async function performSearch() {
+        const query = new URLSearchParams(window.location.search).get('query') || '';
+        const resultsTable = document.getElementById("results-table").querySelector("tbody");
+        const noResultsMessage = document.getElementById("no-results");
+
+        // Clear previous results
+        resultsTable.innerHTML = "";
+
+        if (!query) {
+            noResultsMessage.style.display = "block";
+            return;
+        }
+
+        try {
+            // Fetch data from the backend
+            const response = await fetch(`/search_cars/?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+
+            if (data.results.length > 0) {
+                noResultsMessage.style.display = "none";
+
+                // Populate the table with results
+                data.results.forEach(car => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${car.title}</td>
+                        <td>${car.brand}</td>
+                        <td>${car.model}</td>
+                        <td>${car.year}</td>
+                        <td>${car.mileage} km</td>
+                        <td>$${car.price}</td>
+                    `;
+                    resultsTable.appendChild(row);
+                });
+            } else {
+                noResultsMessage.style.display = "block";
+            }
+        } catch (error) {
+            console.error('Error fetching cars:', error);
+        }
+    }
+
+    
+
+    // Trigger search on page load
+    window.onload = performSearch;
+</script>
+

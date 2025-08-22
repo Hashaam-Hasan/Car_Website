@@ -1,9 +1,21 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 # from .models import UserProfile
 # from .forms import RegisterForm, LoginForm
 from django.contrib import messages
+
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from .models import Car, FavoriteCar
+
+# from .models import UserProfile
+from .forms import CarForm
+
+
+#ye favourite ka h k login k saath hi hoga sirf
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 # Landing Page
 def se_project(request):
@@ -29,6 +41,9 @@ def contribution(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+
 
 # ye poora login page ka naya kaam
 def login_view(request):
@@ -78,17 +93,10 @@ def signup_view(request):
 
 
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
-# from .models import UserProfile
-from .forms import CarForm
-from django.contrib import messages
 
 
-from django.shortcuts import render, redirect
-from .models import Car
-from .forms import CarForm
+
+
 
 # Landing Page
 def se_project(request):
@@ -150,11 +158,7 @@ def market_place(request):
 
 
 
-#ye favourite ka h k login k saath hi hoga sirf
-from django.shortcuts import render, redirect
-from .models import Car, FavoriteCar
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+
 
 # Add car to favorites
 @login_required
@@ -170,14 +174,14 @@ def add_to_favorites(request, car_id):
 
 # Remove car from favorites
 @login_required
-def remove_from_favorites(request, car_id):
-    car = Car.objects.get(id=car_id)
-    user = request.user
-    # Remove the car from the user's favorites
-    favorite_car = FavoriteCar.objects.filter(user=user, car=car)
-    if favorite_car.exists():
-        favorite_car.delete()
-    return redirect('user_account')
+# def remove_from_favorites(request, car_id):
+#     car = Car.objects.get(id=car_id)
+#     user = request.user
+#     # Remove the car from the user's favorites
+#     favorite_car = FavoriteCar.objects.filter(user=user, car=car)
+#     if favorite_car.exists():
+#         favorite_car.delete()
+#     return redirect('user_account')
 
 # User's account page to view favorites
 @login_required
@@ -193,10 +197,7 @@ def user_account(request):
 
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-from .models import Car, FavoriteCar
+
 
 @login_required
 def toggle_favorite(request, car_id):
@@ -211,3 +212,245 @@ def toggle_favorite(request, car_id):
 def favorite_cars(request):
     favorites = FavoriteCar.objects.filter(user=request.user)
     return render(request, 'user_account_page.html', {'favorites': favorites})
+
+
+
+
+
+
+
+
+
+
+#ye wali filetr
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+from .models import Car, FavoriteCar
+
+# Add car to favorites
+@login_required
+def add_to_favorites(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    user = request.user
+    
+    # Check if car is already in the user's favorite list
+    if FavoriteCar.objects.filter(user=user, car=car).exists():
+        messages.info(request, "This car is already in your favorites!")
+        return redirect('market_place')  # Redirect back to marketplace
+    
+    # Add car to favorites
+    FavoriteCar.objects.create(user=user, car=car)
+    messages.success(request, "Car added to your favorites!")
+    return redirect('market_place')  # Redirect back to marketplace
+
+# Remove car from favorites
+@login_required
+# def remove_from_favorites(request, car_id):
+#     car = get_object_or_404(Car, id=car_id)
+#     user = request.user
+    
+#     # Remove the car from the user's favorites
+#     favorite_car = FavoriteCar.objects.filter(user=user, car=car)
+#     if favorite_car.exists():
+#         favorite_car.delete()
+#         messages.success(request, "Car removed from your favorites!")
+#     else:
+#         messages.info(request, "This car is not in your favorites!")
+    
+#     return redirect('user_account')  # Redirect to the user's account page
+
+# User's account page to view favorites
+@login_required
+def user_account(request):
+    user = request.user
+    favorite_cars = FavoriteCar.objects.filter(user=user)
+    return render(request, 'user_account_page.html', {'favorite_cars': favorite_cars})
+
+# Toggle favorite status (AJAX for like/unlike functionality)
+@login_required
+def toggle_favorite(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    favorite, created = FavoriteCar.objects.get_or_create(user=request.user, car=car)
+    
+    if not created:
+        favorite.delete()  # If it already exists, unfavorite it
+        return JsonResponse({'favorited': False})
+    
+    return JsonResponse({'favorited': True})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+from .models import Car, FavoriteCar
+
+# Add car to favorites
+@login_required
+def add_to_favorites(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    user = request.user
+    
+    # Check if car is already in the user's favorite list
+    if FavoriteCar.objects.filter(user=user, car=car).exists():
+        messages.info(request, "This car is already in your favorites!")
+        return redirect('market_place')  # Redirect back to marketplace
+    
+    # Add car to favorites
+    FavoriteCar.objects.create(user=user, car=car)
+    messages.success(request, "Car added to your favorites!")
+    return redirect('market_place')  # Redirect back to marketplace
+
+# Remove car from favorites
+@login_required
+# def remove_from_favorites(request, car_id):
+#     car = get_object_or_404(Car, id=car_id)
+#     user = request.user
+    
+#     # Remove the car from the user's favorites
+#     favorite_car = FavoriteCar.objects.filter(user=user, car=car)
+#     if favorite_car.exists():
+#         favorite_car.delete()
+#         messages.success(request, "Car removed from your favorites!")
+#     else:
+#         messages.info(request, "This car is not in your favorites!")
+    
+#     return redirect('user_account')  # Redirect to the user's account page
+
+# User's account page to view favorites
+@login_required
+def user_account(request):
+    user = request.user
+    favorite_cars = FavoriteCar.objects.filter(user=user)
+    return render(request, 'user_account_page.html', {'favorite_cars': favorite_cars})
+
+# Toggle favorite status (AJAX for like/unlike functionality)
+@login_required
+def toggle_favorite(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    favorite, created = FavoriteCar.objects.get_or_create(user=request.user, car=car)
+    
+    if not created:
+        favorite.delete()  # If it already exists, unfavorite it
+        return JsonResponse({'favorited': False})
+    
+    return JsonResponse({'favorited': True})
+
+
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render
+from django.db.models.functions import Lower
+from .models import FavoriteCar
+
+def user_account_page(request):
+    if request.user.is_authenticated:
+        favorite_cars = FavoriteCar.objects.filter(user=request.user).select_related('car')
+        unique_brands = (
+        FavoriteCar.objects.filter(user=request.user)
+        .values_list('car__brand_name', flat=True)
+        .distinct()
+    )
+    else:
+        favorite_cars = []
+
+    context = {
+        'favorite_cars': favorite_cars,
+        'unique_brands': unique_brands,
+    }
+    return render(request, 'user_account_page.html', context)
+
+
+# def user_account_page(request):
+#     favorites = FavoriteCar.objects.filter(user=request.user).select_related('car')
+#     unique_brands = (
+#         FavoriteCar.objects.filter(user=request.user)
+#         .values_list('car__brand_name', flat=True)
+#         .distinct()
+#     )
+#     context = {
+#         'favorites': favorites,
+#         'unique_brands': unique_brands,
+#     }
+#     return render(request, 'user_account_page.html', context)
+
+
+
+
+
+
+
+
+# #for removing fav in user
+# from django.http import JsonResponse
+# from django.shortcuts import get_object_or_404
+# from .models import FavoriteCar
+
+# def remove_from_favorite(request, favorite_id):
+#     if request.method == 'POST':
+#         favorite = get_object_or_404(FavoriteCar, id=favorite_id, user=request.user)
+#         favorite.delete()
+#         return JsonResponse({'success': True, 'message': 'Removed from favorites.'})
+#     return JsonResponse({'success': False, 'message': 'Invalid request.'})
+
+
+
+
+def car_search_results(request):
+    query = request.GET.get('title', '').strip()  # Get the title from the request
+    cars = Car.objects.filter(title__icontains=query) if query else Car.objects.all()  # Filter or show all
+    return render(request, 'car_search_results.html', {'cars': cars, 'query': query})
+
+
+
+
+def search_cars(request):
+    query = request.GET.get('query', '').strip()
+    if query:
+        cars = Car.objects.filter(title__icontains=query)
+        car_list = [
+            {
+                'title': car.title,
+                'brand': car.brand_name,
+                'model': car.model,
+                'year': car.year,
+                'mileage': car.mileage,
+                'price': car.price,
+            }
+            for car in cars
+        ]
+        return JsonResponse({'results': car_list})
+    return JsonResponse({'results': []})

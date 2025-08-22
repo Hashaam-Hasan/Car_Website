@@ -1,197 +1,716 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/car_sale.css' %}">
-<link rel="stylesheet" href="{% static 'css\style.css' %}">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Your Car</title>
-    <!-- <link rel="stylesheet" href="car_sale.css"> Link to your CSS -->
-    <!-- Boxicons CDN Link -->
+    <title>List Your Car | SMASH CAR EXPERTS</title>
+    
+    <!-- Boxicons -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Colors - Red Theme */
+            --primary: 0 100% 50%; /* Pure red */
+            --primary-foreground: 0 0% 100%; /* White text on red */
+            --primary-glow: 0 100% 70%; /* Lighter glowing red */
+            --primary-dark: 0 100% 25%; /* Dark red */
+
+            /* Background Colors */
+            --background: 0 0% 0%; /* Black background */
+            --foreground: 0 0% 100%; /* White text */
+            --card: 0 0% 5%; /* Dark card background */
+            --card-foreground: 0 0% 100%; /* White card text */
+
+            /* Muted Colors */
+            --muted: 0 0% 15%; /* Dark gray muted bg */
+            --muted-foreground: 0 0% 70%; /* Gray text */
+
+            /* Border and Accent */
+            --border: 0 0% 20%; /* Dark gray border */
+            --accent: 0 100% 30%; /* Deep red accent */
+            --accent-foreground: 0 0% 100%; /* White accent text */
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 30%));
+            --gradient-hero: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 20%));
+            --gradient-subtle: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 100% 15%));
+
+            /* Shadows */
+            --shadow-card: 0 1px 3px 0 rgba(255, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 0, 0, 0.1);
+            --shadow-elegant: 0 10px 25px -5px rgba(255, 0, 0, 0.3), 0 4px 6px -2px rgba(255, 0, 0, 0.2);
+            --shadow-glow: 0 0 25px rgba(255, 0, 0, 0.6);
+
+            /* Animations */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            padding: 0.75rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .top-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item, .user-actions a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .contact-item:hover, .user-actions a:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+        
+        .user-social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .social-links a {
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .profile-circle {
+            width: 2rem;
+            height: 2rem;
+            background-color: hsl(var(--primary-foreground));
+            color: hsl(var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .profile-circle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Navigation */
+        .navigation {
+            background-color: hsl(var(--background));
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: hsl(var(--foreground));
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: hsl(var(--primary));
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: hsl(var(--primary));
+        }
+        
+        .add-listing-btn {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+        
+        .add-listing-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .form-container {
+            background-color: hsl(var(--card));
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-elegant);
+            margin: 0 auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-header p {
+            color: hsl(var(--muted-foreground));
+            font-size: 1.1rem;
+        }
+
+        /* Form Styling */
+        .car-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+            display: block;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: hsl(var(--muted));
+            border: 2px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            color: hsl(var(--foreground));
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* File Input Styling */
+        .file-input-container {
+            position: relative;
+        }
+
+        .file-input-container input[type="file"] {
+            padding: 1rem;
+            background-color: hsl(var(--muted));
+            border: 2px dashed hsl(var(--border));
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .file-input-container input[type="file"]::file-selector-button {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            margin-right: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .file-input-container input[type="file"]::file-selector-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Fun Bubble Button */
+        .fun-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .bubble-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: hsl(var(--primary-foreground));
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-elegant);
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bubble-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-header-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .form-header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+    </style>
 </head>
 <body>
+    <!-- Top Header -->
     <div class="top-header">
-        <div class="out-box">
-            <div class="inside-box">
-                <div class="col-1">
-                    <span class="icon-text"><i class="bx bxl-gmail"></i> info@gmail.com</span>
-                    <span class="icon-text"><i class="bx bx-phone-call"></i> 0332-1234567</span>
-                    <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
+        <div class="container">
+            <div class="top-header-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bx bxl-gmail"></i>
+                        <span>info@smashcarexperts.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bx-phone-call"></i>
+                        <span>0332-1234567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bxs-time"></i>
+                        <span>Mon-Fri (8am-10pm)</span>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <a href="#" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
-                    <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a>
+                
+                <div class="user-social">
+                    <div class="user-actions">
+                        <a href="{% url 'login' %}">
+                            <i class="bx bx-log-in"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="{% url 'signup' %}">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </div>
+                    
+                    <div style="width: 1px; height: 1.5rem; background-color: rgba(255,255,255,0.3);"></div>
+                    
                     <span>Follow us:</span>
-                    <div class="social">
-                        <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
-                        <a href="#"><i class="bx bxl-instagram"></i></a>
-                        <a href="#"><i class="bx bxl-twitter"></i></a>
-                        <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+                    
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                    
+                    <div class="user-profile">
+                        {% if user.is_authenticated %}
+                            <!-- Display User Initial -->
+                            <a href="{% url 'user_account_page' %}" class="profile-circle">
+                                {{ user.first_name|slice:":1"|default:"U" }}
+                            </a>
+                        {% else %}
+                            <!-- Redirect to Login Page -->
+                            <a href="{% url 'login' %}" class="profile-circle">
+                                <i class="bx bx-user"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Navbar Section Start -->
-    <header class="header">
-        <div class="logo">
-            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.pngs" %}' alt="Smash Car Experts Logo">
-        </div>
-        <nav>
-            <div class="navbar">
-                <ul class="navlinks">
-                    <li><a href="{% url 'landing_page' %}" class="active">Home</a></li>
-                    <li><a href="{% url 'about_us' %}">About</a></li>
-                    <li><a href="{% url 'market_place' %}">Market Place</a></li>
-                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href=#>About</a></li>
-                            <li><a href="#">Car Listing <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-two">
-                                    <li><a href="#">Listing Grid</a></li>
-                                    <li><a href="#">Listing List</a></li>
-                                    <li><a href="#">Listing Single</a></li>
-                                    <li><a href="#">Compare</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Account</a></li>
-                            <li><a href="#">My Account <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-three">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">My Listing</a></li>
-                                    <li><a href="#">Add Listing</a></li>
-                                    <li><a href="#">My Favourites</a></li>
-                                    <li><a href="#">Messages</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Authentication <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-four">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
-                                    <li><a href="#">Forgot Password</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Service <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-five">
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Services Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dealer <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-six">
-                                    <li><a href="#">Dealer</a></li>
-                                    <li><a href="#">Dealer Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Extra Pages</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Pricing Plan</a></li>
-                            <li><a href="#">Calculator</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Shop Cart</a></li>
-                            <li><a href="#">Shop Checkout</a></li>
-                            <li><a href="#">Shop Single</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'about_us' %}">Blog <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Blog Single</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'contribution' %}">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">SMASH CAR EXPERTS</div>
+                
+                <ul class="nav-links">
+                    <li><a href="{% url 'landing_page' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}" class="{% if '/about/' in request.path %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}" class="{% if '/marketplace/' in request.path %}active{% endif %}">Market Place</a></li>
+                    <li><a href="{% url 'contribution' %}" class="{% if '/blog/' in request.path %}active{% endif %}">Blog</a></li>
                 </ul>
-            </div>               
-            <div class="others">
-                <i class="bx bx-search"></i>
-                <i class="bx bx-cart-download"></i>
-                <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
-                <i class="bx bx-menu" id="menu-btn"></i>
+                
+                <a href="{% url 'selling_page' %}" class="add-listing-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    Add Listing
+                </a>
             </div>
-        </nav>
-    </header>
-    
-    <!-- Hovering Fun Bubble Button -->
-    <div class="fun-menu-bubble" id="fun-menu-bubble">
-        <button style="position: fixed; bottom: 20px; right: 20px; 
-                    background-color: #ff3b3b; border-radius: 50%; 
-                    border: none; padding: 15px; font-size: 2rem; 
-                    cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-                    transition: transform 0.3s ease;">
+        </div>
+    </nav>
 
-            <i class="bx bxs-smiley" style="font-size: 30px;"></i> <!-- Smiley Icon -->
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>List Your Car</h1>
+                <p>Fill out the form below to add your vehicle to our premium marketplace</p>
+            </div>
+            
+            <form method="POST" enctype="multipart/form-data" class="car-form">
+                {% csrf_token %}
+                
+                <!-- Django Form Rendered Properly -->
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: hsl(var(--muted-foreground)); margin-top: 0.25rem; display: block;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div style="color: hsl(var(--primary)); margin-top: 0.25rem; font-size: 0.875rem;">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                
+                <button type="submit" class="submit-btn">
+                    <i class="bx bx-check-circle"></i>
+                    List My Car
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fun Bubble Button -->
+    <div class="fun-bubble">
+        <button class="bubble-btn">
+            <i class="bx bxs-smiley"></i>
         </button>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
+        </div>
+    </footer>
 
-
-
-    
-    <!-- <div class="navbar1"> -->
-            <!-- <h2>Menu</h2> -->
-            <!-- <ul> -->
-                <!-- <li>Cars Purchased</li> -->
-                <!-- <li>Favourite Cars</li> -->
-                <!-- <li>Cars Enlisted</li> -->
-                <!-- <li>Cars Sold</li> -->
-            <!-- </ul> -->
-            <!-- <button class="logout">Logout</button> -->
-    <!-- </div> -->
-    
-    <div class="container">
-            <h1>List Your Car</h1>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Submit</button>
-            </form>
-    </div>
-
-    
-
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add focus effects to form elements
+            const formInputs = document.querySelectorAll('input, select, textarea');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = 'hsl(var(--primary))';
+                    this.style.boxShadow = '0 0 0 3px rgba(255, 0, 0, 0.1)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = 'hsl(var(--border))';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Add ripple effect to submit button
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            submitBtn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+            
+            // Add style for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Fun bubble button animation
+            const bubbleBtn = document.querySelector('.bubble-btn');
+            
+            bubbleBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(10deg)';
+            });
+            
+            bubbleBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+            
+            bubbleBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.9) rotate(-10deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }, 300);
+                
+                // Add a fun effect
+                const funText = document.createElement('div');
+                funText.textContent = '🚗 List Your Car! 🚗';
+                funText.style.position = 'fixed';
+                funText.style.top = '50%';
+                funText.style.left = '50%';
+                funText.style.transform = 'translate(-50%, -50%)';
+                funText.style.background = 'var(--gradient-primary)';
+                funText.style.color = 'hsl(var(--primary-foreground))';
+                funText.style.padding = '1rem 2rem';
+                funText.style.borderRadius = '0.5rem';
+                funText.style.fontWeight = 'bold';
+                funText.style.zIndex = '10000';
+                funText.style.boxShadow = 'var(--shadow-glow)';
+                funText.style.animation = 'fadeIn 0.3s ease-out';
+                
+                document.body.appendChild(funText);
+                
+                setTimeout(() => {
+                    funText.style.animation = 'fadeOut 0.3s ease-in forwards';
+                    setTimeout(() => {
+                        document.body.removeChild(funText);
+                    }, 300);
+                }, 2000);
+            });
+            
+            // Add fadeOut animation
+            const fadeOutStyle = document.createElement('style');
+            fadeOutStyle.textContent = `
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    to { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                }
+            `;
+            document.head.appendChild(fadeOutStyle);
+        });
+    </script>
 </body>
 </html>
-<script>
-    const menuBubble = document.getElementById('menu-bubble1');
-    const navbar = document.querySelector('.navbar1');
-    const menuBtn = document.getElementById('menu-btn1');
-
-    // Function to toggle sidebar visibility and bubble
-    function toggleSidebar() {
-        navbar.classList.toggle('active');
-        menuBubble.classList.toggle('hidden'); // Toggle bubble visibility
-    }
-
-    // Show menu on bubble click
-    menuBubble.addEventListener('click', function (e) {
-        e.stopPropagation(); // Prevent click event from bubbling up
-        toggleSidebar();
-    });
-
-    // Show menu on button click
-    menuBtn.addEventListener('click', function (e) {
-        e.stopPropagation(); // Prevent click event from bubbling up
-        toggleSidebar();
-    });
-
-    // Hide menu if clicking outside of it
-    document.addEventListener('click', function (e) {
-        // Check if the click was outside the navbar and the bubble
-        if (!navbar.contains(e.target) && !menuBubble.contains(e.target)) {
-            navbar.classList.remove('active'); // Hide the sidebar
-            menuBubble.classList.remove('hidden'); // Show the bubble again
-        }
-    });
-</script>

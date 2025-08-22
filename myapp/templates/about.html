@@ -1,31 +1,321 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
 <!DOCTYPE html>
+<link rel="stylesheet" href="{% static 'css\about.css' %}">
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <!-- <link rel="stylesheet" href="about.css"> -->
+    <title>About Us | SMASH CAR EXPERTS</title>
+    
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <section class="section__container experience__container" id="about">
-        <div class="experience__image">
-          <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\experience1.jpg" %}' alt="experience" />
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="container">
+            <div class="top-header-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bx bxl-gmail"></i>
+                        <span>info@smashcarexperts.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bx-phone-call"></i>
+                        <span>0332-1234567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bxs-time"></i>
+                        <span>Mon-Fri (8am-10pm)</span>
+                    </div>
+                </div>
+                
+                <div class="user-social">
+                    <div class="user-actions">
+                        <a href="{% url 'login' %}">
+                            <i class="bx bx-log-in"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="{% url 'signup' %}">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </div>
+                    
+                    <div style="width: 1px; height: 1.5rem; background-color: rgba(255,255,255,0.3);"></div>
+                    
+                    <span>Follow us:</span>
+                    
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                    
+                    <div class="user-profile">
+                        {% if user.is_authenticated %}
+                            <!-- Display User Initial -->
+                            <a href="{% url 'user_account_page' %}" class="profile-circle">
+                                {{ user.first_name|slice:":1"|default:"U" }}
+                            </a>
+                        {% else %}
+                            <!-- Redirect to Login Page -->
+                            <a href="{% url 'login' %}" class="profile-circle">
+                                <i class="bx bx-user"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="experience__content">
-          <p class="section__subheader">WHO WE ARE</p>
-          <h1 class="section__header">
-            We Have 25 Years Of Experience In This Industry
-          </h1>
-          <p class="section__description">
-            With a rich legacy spanning 25 years, our commitment to excellence in
-            car servicing is unwavering. Our seasoned team brings a wealth of
-            experience to ensure your vehicle receives top-notch care. Trust in
-            our expertise to keep your car running smoothly and safely...
-          </p>
-          <a href="cont.html"><button class="btn">Read More</button></a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">SMASH CAR EXPERTS</div>
+                
+                <ul class="nav-links">
+                    <li><a href="{% url 'landing_page' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}" class="{% if '/about/' in request.path %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}" class="{% if '/marketplace/' in request.path %}active{% endif %}">Market Place</a></li>
+                    <li><a href="{% url 'contribution' %}" class="{% if '/blog/' in request.path %}active{% endif %}">Blog</a></li>
+                </ul>
+                
+                <a href="{% url 'selling_page' %}" class="add-listing-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    Add Listing
+                </a>
+            </div>
         </div>
-      </section>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container about-hero-content">
+            <h1>About Smash Car Experts</h1>
+            <p>Your trusted partner in the automotive industry for over 25 years</p>
+        </div>
+    </section>
+
+    <!-- About Content Section -->
+    <section class="about-content">
+        <div class="container about-container">
+            <div class="about-image animate-fade-in-up">
+                <img src="{% static 'images/experience1.jpg' %}" alt="Our Experience">
+                <div class="experience-badge">
+                    <div class="experience-badge-icon">
+                        <i class="bx bx-award"></i>
+                    </div>
+                    <div class="experience-badge-text">25 Years of<br>Quality Service</div>
+                </div>
+            </div>
+            
+            <div class="about-text animate-fade-in-up">
+                <p class="section-subheader">
+                    <i class="bx bx-group"></i>
+                    WHO WE ARE
+                </p>
+                <h2 class="section-header">
+                    We Have 25 Years Of Experience In This Industry
+                </h2>
+                <p class="section-description">
+                    With a rich legacy spanning 25 years, our commitment to excellence in
+                    car servicing is unwavering. Our seasoned team brings a wealth of
+                    experience to ensure your vehicle receives top-notch care. Trust in
+                    our expertise to keep your car running smoothly and safely. We've
+                    revolutionized the way people buy and sell vehicles, bringing together
+                    thousands of verified dealers and private sellers.
+                </p>
+                <a href="{% url 'contribution' %}" class="btn">
+                    <i class="bx bx-book-open"></i>
+                    Read More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-car"></i>
+                    </div>
+                    <span class="stat-number">12,500+</span>
+                    <div class="stat-label">Available Cars</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-happy"></i>
+                    </div>
+                    <span class="stat-number">98,500+</span>
+                    <div class="stat-label">Satisfied Clients</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-group"></i>
+                    </div>
+                    <span class="stat-number">250+</span>
+                    <div class="stat-label">Expert Workers</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-trophy"></i>
+                    </div>
+                    <span class="stat-number">25+</span>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="{% static 'images/team1.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">John Anderson</h3>
+                        <p class="team-role">Founder & CEO</p>
+                        <p class="team-description">With over 25 years in the automotive industry, John leads our vision for excellence.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="bx bxl-linkedin"></i></a>
+                            <a href="#"><i class="bx bxl-twitter"></i></a>
+                            <a href="#"><i class="bx bxl-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="{% static 'images/team2.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Sarah Johnson</h3>
+                        <p class="team-role">Operations Director</p>
+                        <p class="team-description">Sarah ensures our operations run smoothly and our customers are always satisfied.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="bx bxl-linkedin"></i></a>
+                            <a href="#"><i class="bx bxl-twitter"></i></a>
+                            <a href="#"><i class="bx bxl-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="{% static 'images/team3.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Michael Chen</h3>
+                        <p class="team-role">Technical Director</p>
+                        <p class="team-description">Michael leads our technical team with expertise in automotive diagnostics and repair.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="bx bxl-linkedin"></i></a>
+                            <a href="#"><i class="bx bxl-twitter"></i></a>
+                            <a href="#"><i class="bx bxl-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="{% static 'images/team4.jpg' %}" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Emily Rodriguez</h3>
+                        <p class="team-role">Customer Experience Manager</p>
+                        <p class="team-description">Emily ensures every customer interaction with Smash Car Experts is exceptional.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="bx bxl-linkedin"></i></a>
+                            <a href="#"><i class="bx bxl-twitter"></i></a>
+                            <a href="#"><i class="bx bxl-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animate stats counters
+        document.addEventListener('DOMContentLoaded', function() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.textContent.replace('+', ''));
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            statNumbers.forEach(counter => {
+                observer.observe(counter);
+            });
+
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        element.textContent = target.toLocaleString() + '+';
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(start).toLocaleString() + '+';
+                    }
+                }, 16);
+            }
+
+            // Add hover effects to team members
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = 'var(--shadow-elegant)';
+                });
+                
+                member.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'var(--shadow-card)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

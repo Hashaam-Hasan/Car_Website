@@ -1,390 +1,583 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <!DOCTYPE html>
+<link rel="stylesheet" href="{% static 'css\se_project.css' %}">
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMASH CAR EXPERTS</title>
-
-    <!-- Customer CSS File -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Boxicons CDN Link -->
+    <title>SMASH CAR EXPERTS | Premium Auto Marketplace - Find Your Dream Car</title>
+    <meta name="description" content="Discover the world's largest car marketplace with over 12,500 available cars. Buy and sell vehicles with confidence at Smash Car Experts - 30 years of trusted automotive service.">
+    <meta name="keywords" content="car marketplace, buy cars, sell cars, luxury vehicles, used cars, new cars, auto dealers">
+    
+    <!-- External Libraries -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <!-- Swiper CSS Links -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    
 </head>
 <body>
     <!-- Top Header -->
     <div class="top-header">
-        <div class="out-box">
-            <div class="inside-box">
-                <div class="col-1">
-                    <span class="icon-text"><i class="bx bxl-gmail"></i> info@gmail.com</span>
-                    <span class="icon-text"><i class="bx bx-phone-call"></i> 0332-1234567</span>
-                    <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
+        <div class="container">
+            <div class="top-header-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bx bxl-gmail"></i>
+                        <span>info@smashcarexperts.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bx-phone-call"></i>
+                        <span>0332-1234567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bxs-time"></i>
+                        <span>Mon-Fri (8am-10pm)</span>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <a href="{% url 'login' %}" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
-                    <!-- <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a> -->
+                
+                <div class="user-social">
+                    <div class="user-actions">
+                        <a href="{% url 'login' %}">
+                            <i class="bx bx-log-in"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="{% url 'signup' %}">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </div>
+                    
+                    <div style="width: 1px; height: 1.5rem; background-color: rgba(255,255,255,0.3);"></div>
+                    
                     <span>Follow us:</span>
-                    <div class="social">
-                        <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
-                        <a href="#"><i class="bx bxl-instagram"></i></a>
-                        <a href="#"><i class="bx bxl-twitter"></i></a>
-                        <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+                    
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                    
+                    <div class="user-profile">
+                        {% if user.is_authenticated %}
+                            <!-- Display User Initial -->
+                            <a href="{% url 'user_account_page' %}" class="profile-circle">
+                                {{ user.first_name|slice:":1"|default:"U" }}
+                            </a>
+                        {% else %}
+                            <!-- Redirect to Login Page -->
+                            <a href="{% url 'login' %}" class="profile-circle">
+                                <i class="bx bx-user"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Navbar Section Start -->
-    <header class="header">
-        <div class="logo">
-            <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png' %}"alt="Smash Car Experts Logo">
-        </div>
-        <nav>
-            <div class="navbar">
-                <ul class="navlinks">
-                    <li><a href="landing_page" class="active">Home</a></li>
-                    <li><a href="{% url 'about_us' %}">About</a></li>
-                    <li><a href="{% url 'market_place' %}">Market Place</a></li>
-                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href=#>About</a></li>
-                            <li><a href="#">Car Listing <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-two">
-                                    <li><a href="#">Listing Grid</a></li>
-                                    <li><a href="#">Listing List</a></li>
-                                    <li><a href="#">Listing Single</a></li>
-                                    <li><a href="#">Compare</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Account</a></li>
-                            <li><a href="#">My Account <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-three">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">My Listing</a></li>
-                                    <li><a href="#">Add Listing</a></li>
-                                    <li><a href="#">My Favourites</a></li>
-                                    <li><a href="#">Messages</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Authentication <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-four">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
-                                    <li><a href="#">Forgot Password</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Service <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-five">
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Services Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dealer <i class="bx bx-chevron-down chev"></i></a>
-                                <ul class="drop-down-six">
-                                    <li><a href="#">Dealer</a></li>
-                                    <li><a href="#">Dealer Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Extra Pages</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Pricing Plan</a></li>
-                            <li><a href="#">Calculator</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Shop Cart</a></li>
-                            <li><a href="#">Shop Checkout</a></li>
-                            <li><a href="#">Shop Single</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'about_us' %}">Blog <i></i></a>
-                        <!-- <ul class="drop-down">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Blog Single</a></li>
-                        </ul> -->
-                    </li>
-                    <li><a href="{% url 'contribution' %}">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">SMASH CAR EXPERTS</div>
+                
+                <ul class="nav-links">
+                    <li><a href="{% url 'landing_page' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}" class="{% if '/about/' in request.path %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}" class="{% if '/marketplace/' in request.path %}active{% endif %}">Market Place</a></li>
+                    <li><a href="{% url 'contribution' %}" class="{% if '/blog/' in request.path %}active{% endif %}">Blog</a></li>
                 </ul>
-            </div>       
+                
+                <a href="{% url 'selling_page' %}" class="add-listing-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    Add Listing
+                </a>
+            </div>
+        </div>
+    </nav>
 
-            <div class="others">
-                <i class="bx bx-search"></i>
-                <i class="bx bx-cart-download"></i>
-                <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
-                <i class="bx bx-menu" id="menu-btn"></i>
+    <!-- Hero Carousel -->
+    <section class="hero-carousel" id="home">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text animate-fade-in-up">
+                                <div class="slide-subtitle">Welcome to Smash Car Experts</div>
+                                <h1 class="slide-title">
+                                    Best way to find your <span class="text-gradient">dream</span> car
+                                </h1>
+                                <p class="slide-description">
+                                    Your trusted partner for finding the best car deals available with over 30 years of experience in the automotive industry.
+                                </p>
+                                <div class="slide-buttons">
+                                    <a href="{% url 'market_place' %}" class="btn-primary">
+                                        Explore Cars
+                                        <i class="bx bx-right-arrow-alt"></i>
+                                    </a>
+                                    <a href="{% url 'about_us' %}" class="btn-secondary">
+                                        <i class="bx bx-play"></i>
+                                        Learn More
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="slide-image">
+                                <img src="{% static 'images/lambo.jpeg' %}" alt="Luxury Car" class="animate-float">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text animate-fade-in-up">
+                                <div class="slide-subtitle">Premium Selection</div>
+                                <h1 class="slide-title">
+                                    Discover <span class="text-gradient">exclusive</span> vehicles
+                                </h1>
+                                <p class="slide-description">
+                                    Explore our curated inventory to find the car that perfectly suits your lifestyle and preferences.
+                                </p>
+                                <div class="slide-buttons">
+                                    <a href="{% url 'market_place' %}" class="btn-primary">
+                                        View Inventory
+                                        <i class="bx bx-right-arrow-alt"></i>
+                                    </a>
+                                    <button class="btn-secondary">
+                                        <i class="bx bx-play"></i>
+                                        Book Test Drive
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="slide-image">
+                                <img src="{% static 'images/merci.jpeg' %}" alt="Premium Car" class="animate-float">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text animate-fade-in-up">
+                                <div class="slide-subtitle">Sell With Confidence</div>
+                                <h1 class="slide-title">
+                                    Get the best <span class="text-gradient">value</span> for your car
+                                </h1>
+                                <p class="slide-description">
+                                    Experience quality and affordability with our premium selling platform designed for maximum returns.
+                                </p>
+                                <div class="slide-buttons">
+                                    <a href="{% url 'selling_page' %}" class="btn-primary">
+                                        Sell Your Car
+                                        <i class="bx bx-right-arrow-alt"></i>
+                                    </a>
+                                    <button class="btn-secondary">
+                                        <i class="bx bx-play"></i>
+                                        Get Quote
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="slide-image">
+                                <img src="{% static 'images/Car-Colour-Facts-8-1366x717_2x-removebg-preview.png' %}" alt="Sports Car" class="animate-float">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-        </nav>
-    </header>
-
-    <div class="home">
-        <div class="swiper myHome">
-            <div class="swiper-wrapper">
-    
-                <!-- Slide One -->
-                <div class="swiper-slide slide slide-one">
-                    <div class="col-1">
-                        <h4 class="welcome-text">Welcome to Smash Car Experts</h4>
-                        <h1>Best way to find <span class="highlight">your dream</span> car</h1>
-                        <p class="description">Your trusted partner for finding the best car deals available.</p>
-                        <div class="button">
-                            <button class="about"><i class="bx bx-right-arrow-alt"></i> About More</button>
-                            <button class="learn"><i class="bx bx-right-arrow-alt"></i> Learn More</button>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\Car-Colour-Facts-8-1366x717_2x-removebg-preview.png' %}" alt="Car Image">
-                    </div>
-                </div>
-    
-                <!-- Slide Two -->
-                <div class="swiper-slide slide slide-two">
-                    <div class="col-1">
-                        <h4 class="welcome-text">Welcome to Smash Car Experts</h4>
-                        <h1>Best way to find <span class="highlight">your dream</span> car</h1>
-                        <p class="description">Explore our inventory to find the car that suits you best.</p>
-                        <div class="button">
-                            <button class="about"><i class="bx bx-right-arrow-alt"></i> About More</button>
-                            <button class="learn"><i class="bx bx-right-arrow-alt"></i> Learn More</button>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\audi-removebg-preview.png' %}" alt="Car Image">
-                    </div>
-                </div>
-    
-                <!-- Slide Three -->
-                <div class="swiper-slide slide slide-three">
-                    <div class="col-1">
-                        <h4 class="welcome-text">Welcome to Smash Car Experts</h4>
-                        <h1>Best way to find <span class="highlight">your dream</span> car</h1>
-                        <p class="description">Experience quality and affordability with us.</p>
-                        <div class="button">
-                            <button class="about"><i class="bx bx-right-arrow-alt"></i> About More</button>
-                            <button class="learn"><i class="bx bx-right-arrow-alt"></i> Learn More</button>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\img3-removebg-preview.png' %}"  alt="Car Image">
-                    </div>
-                </div>
-    
-            </div>
-    
-            <!-- Swiper Navigation Buttons -->
+            <!-- Navigation -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-        </div>
-    </div>
-
-    <!---perfect section start--->
-    <div class="search">
-        <div class="find">
-            <h3>Lets Find Your Perfect Car</h3>
-            <div class="find-row">
-                <div class="find-item">
-                    <h4> Car Condition</h4>
-                    <select>
-                        <option value="">All Status</option>
-                        <option value="">New Car</option>
-                        <option value="">Used Car </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> Brand Name</h4>
-                    <select>
-                        <option value="">All Brand</option>
-                        <option value="">BMW</option>
-                        <option value="">Ferrari </option>
-                        <option value="">Hyundai </option>
-                        <option value="">Nissan </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> Car Model</h4>
-                    <select>
-                        <option value="">All Model</option>
-                        <option value="">3-series</option>
-                        <option value="">Camera </option>
-                        <option value="">G-TR </option>
-                        <option value="">Macan </option>
-                        <option value="">N-series </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> All Years</h4>
-                    <select>
-                        <option value="">2023 </option>
-                        <option value="">2022 </option>
-                        <option value="">2021 </option>
-                        <option value="">2020 </option>
-                        <option value="">2019 </option>
-                        <option value="">2018 </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> Choose Milage</h4>
-                    <select>
-                        <option value="">All Milage </option>
-                        <option value="">2000 Miles </option>
-                        <option value="">3000 Miles </option>
-                        <option value="">4000 Miles</option>
-                        <option value="">5000 Miles </option>
-                        <option value="">6000 Miles </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> Price Range</h4>
-                    <select>
-                        <option value="">All Price </option>
-                        <option value="">1,000$-5,000$ </option>
-                        <option value="">5,000$-10,000$ </option>
-                        <option value="">10,000$-15,000$ </option>
-                        <option value="">15,000$-20,000$ </option>
-                        <option value="">20,000$-25,000$ </option>
-                    </select>
-                </div>
-                <div class="find-item">
-                    <h4> Body Type</h4>
-                    <select>
-                        <option value="">All Body Type </option>
-                        <option value="">Sedan</option>
-                        <option value="">Compact</option>
-                        <option value="">Coupe</option>
-                        <option value="">Wagon </option>
-                    </select>
-                </div>
-                <div class="search-btn">
-                    <button><i class="bx bx-search"></i>Find Your Car</button>
-            </div>    
-        </div>
-    </div>
-    
-    <!----market section start--->
-    <section class="market">
-        <div class="col-3">
-            <img class="car-image" src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\Mercedes_Benz_S-class-removebg-preview.png' %}" alt="Car Image">
-            <div class="service">
-                <img class="service-icon" src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\pngtree-auto-car-service-template-picture-image_3605928-removebg-preview.png' %}" alt="Service Icon">
-                <span>30 Years of <br> Quality Service</span>
-            </div>
-        </div>
-        <div class="col-4">
-            <h4><i class="bx bx-car"></i> About Us</h4>
-            <h3><i class="bx bx-car"></i><span>About Us</span> - 
-            World's Largest <span>Car</span> Marketplace</h3>
-            <p class="description">Looking for a car. Perfect place to have your first vehicle. Join Us.</p>
-            
-            <ul class="features">
-                <li><i class="bx bx-check-circle"></i> Satisfied Customers</li>
-                <li><i class="bx bx-check-circle"></i> Great Service</li>
-                <li><i class="bx bx-check-circle"></i> Selling your car on our website is also appreiciated</li>
-            </ul>
-            
-            <button class="discover-more">Discover More <i class="bx bx-right-arrow-alt"></i></button>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
 
-    <!---counter section start--->
-    <div class="counter">
+    <!-- Search Filters -->
+    <section class="search-filters" id="search">
         <div class="container">
-            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\cars.jpg" %}' alt="">
-            <span class="num" data-value ="2000"> 0000</span>
-            <span class="text"><i class="bx bx-plus"></i>Available Cars</span>
+            <h2 class="search-title">Find Your Perfect Car</h2>
+            
+            <div class="filters-grid">
+                <div class="filter-item">
+                    <div class="filter-label">Car Condition</div>
+                    <select class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="new">New Car</option>
+                        <option value="used">Used Car</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Brand Name</div>
+                    <select class="filter-select">
+                        <option value="">All Brands</option>
+                        <option value="bmw">BMW</option>
+                        <option value="ferrari">Ferrari</option>
+                        <option value="hyundai">Hyundai</option>
+                        <option value="nissan">Nissan</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Car Model</div>
+                    <select class="filter-select">
+                        <option value="">All Models</option>
+                        <option value="3-series">3-Series</option>
+                        <option value="camaro">Camaro</option>
+                        <option value="gtr">GT-R</option>
+                        <option value="macan">Macan</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Year</div>
+                    <select class="filter-select">
+                        <option value="">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Mileage</div>
+                    <select class="filter-select">
+                        <option value="">All Mileage</option>
+                        <option value="under-10k">Under 10,000 miles</option>
+                        <option value="10k-30k">10,000-30,000 miles</option>
+                        <option value="30k-50k">30,000-50,000 miles</option>
+                        <option value="50k-plus">50,000+ miles</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Price Range</div>
+                    <select class="filter-select">
+                        <option value="">All Prices</option>
+                        <option value="under-10k">Under $10,000</option>
+                        <option value="10k-20k">$10,000-$20,000</option>
+                        <option value="20k-30k">$20,000-$30,000</option>
+                        <option value="30k-plus">$30,000+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Body Type</div>
+                    <select class="filter-select">
+                        <option value="">All Body Types</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="truck">Truck</option>
+                        <option value="coupe">Coupe</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <div class="filter-label">Fuel Type</div>
+                    <select class="filter-select">
+                        <option value="">All Fuel Types</option>
+                        <option value="gasoline">Gasoline</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="electric">Electric</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="search-button-container">
+                <button class="search-button">
+                    <i class="bx bx-search"></i>
+                    Find Your Car
+                </button>
+            </div>
         </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
         <div class="container">
-            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\key.png" %}' alt="">
-            <span class="num" data-value ="2000"> 0000</span>
-            <span class="text"><i class="bx bx-plus"></i>Satisfied Clients</span>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="{% static 'images/Mercedes_Benz_S-class-removebg-preview.png' %}" alt="Mercedes Benz">
+                    <div class="service-badge animate-pulse">
+                        <div class="service-badge-icon">
+                            <i class="bx bx-award"></i>
+                        </div>
+                        <div class="service-badge-text">30 Years of<br>Quality Service</div>
+                    </div>
+                </div>
+                
+                <div class="about-text">
+                    <h3>
+                        <i class="bx bx-car"></i>
+                        About Us
+                    </h3>
+                    <h2>World's Largest <span class="text-gradient">Car</span> Marketplace</h2>
+                    <p>
+                        At Smash Car Experts, we've revolutionized the way people buy and sell vehicles. Our platform brings together thousands of verified dealers and private sellers to offer you the best selection of vehicles anywhere.
+                    </p>
+                    
+                    <ul class="features-list">
+                        <li>
+                            <i class="bx bx-check-circle"></i>
+                            <span>200,000+ satisfied customers</span>
+                        </li>
+                        <li>
+                            <i class="bx bx-check-circle"></i>
+                            <span>30 years of trusted service</span>
+                        </li>
+                        <li>
+                            <i class="bx bx-check-circle"></i>
+                            <span>Verified vehicle history reports</span>
+                        </li>
+                        <li>
+                            <i class="bx bx-check-circle"></i>
+                            <span>Competitive pricing guaranteed</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="{% url 'about_us' %}" class="btn-secondary">
+                        Discover More
+                        <i class="bx bx-right-arrow-alt"></i>
+                    </a>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="stats-counter">
         <div class="container">
-            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\workers.png" %}' alt="">
-            <span class="num" data-value ="8"> 0000</span>
-            <span class="text"><i class="bx bx-plus"></i>Available Workers</span>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-car"></i>
+                    </div>
+                    <span class="stat-number" data-target="12500">0</span>
+                    <div class="stat-label">Available Cars</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-happy"></i>
+                    </div>
+                    <span class="stat-number" data-target="98500">0</span>
+                    <div class="stat-label">Satisfied Clients</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-group"></i>
+                    </div>
+                    <span class="stat-number" data-target="250">0</span>
+                    <div class="stat-label">Expert Workers</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="bx bx-trophy"></i>
+                    </div>
+                    <span class="stat-number" data-target="30">0</span>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
         <div class="container">
-            <img src='{% static "E:\MyProjects\carwebsite\car\myapp\static\images\experience.jpg" %}' alt="">
-            <span class="num" data-value ="30"> 0000</span>
-            <span class="text"><i class="bx bx-plus"></i>Years Experience</span>
+            <h2 class="cta-title">
+                Ready to Find Your <span class="text-gradient">Perfect</span> Car?
+            </h2>
+            <p class="cta-description">
+                Join thousands of satisfied customers who found their dream vehicles through our platform.
+            </p>
+            <div class="cta-buttons">
+                <a href="{% url 'market_place' %}" class="btn-primary">
+                    Browse Cars Now
+                    <i class="bx bx-right-arrow-alt"></i>
+                </a>
+                <a href="{% url 'selling_page' %}" class="btn-secondary">
+                    Sell Your Car
+                    <i class="bx bx-right-arrow-alt"></i>
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
-
-
-
-
-
-
+    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-</body>
-</html>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        /* Toggle menu */
-        let navBar = document.querySelector(".navlinks");
-        let menuBar = document.querySelector("#menu-btn");
-        menuBar.onclick = () => {
-            navBar.classList.toggle("active");
-        };
-
-        /* Sticky Navbar */
-        window.onscroll = () => {
-            let header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 100);
-        };
-
-        /* Swiper Initialization */
-        var swiper = new Swiper(".myHome", {
-            spaceBetween: 30,
-            centeredSlides: true,
+    <script>
+        // Initialize Swiper
+        const heroSwiper = new Swiper('.hero-swiper', {
             loop: true,
             autoplay: {
-                delay: 2500,
+                delay: 5000,
                 disableOnInteraction: false,
             },
             pagination: {
-                el: ".swiper-pagination",
+                el: '.swiper-pagination',
                 clickable: true,
             },
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            speed: 800,
         });
 
-        /* Counter Section */
-        let valueDisplays = document.querySelectorAll('.num');
-        let interval = 1000;
-
-        valueDisplays.forEach((valueDisplay) => {
-            let startValue = 0;
-            let endValue = parseInt(valueDisplay.getAttribute("data-value"));
-            let duration = Math.floor(interval / endValue);
-
-            let counter = setInterval(function () {
-                startValue += 1;
-                valueDisplay.textContent = startValue;
-                if (startValue === endValue) {
-                    clearInterval(counter);
+        // Animated Counter
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
                 }
-            }, duration);
+            }, 16);
+        }
+
+        // Intersection Observer for counter animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(entry.target, target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all counter elements
+        document.querySelectorAll('.stat-number').forEach(counter => {
+            counterObserver.observe(counter);
         });
-    });
-</script>
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add entrance animations on scroll
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.filter-item, .about-text, .stat-item').forEach(el => {
+            animateOnScroll.observe(el);
+        });
+
+        // Form interactions
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', function() {
+                this.style.borderColor = this.value ? 'hsl(var(--primary))' : 'hsl(var(--border))';
+            });
+        });
+
+        // Button click effects
+        document.querySelectorAll('button, .btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

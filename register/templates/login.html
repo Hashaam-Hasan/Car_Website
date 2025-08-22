@@ -2,160 +2,529 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Design by foolishdeveloper.com -->
-    <title>Login Page</title>
- 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <!--Stylesheet-->
-    <style media="screen">
-      *,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: #080710;
-}
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child{
-    background: linear-gradient(
-        #1845ad,
-        #23a2f6
-    );
-    left: -80px;
-    top: -80px;
-}
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        #ff512f,
-        #f09819
-    );
-    right: -30px;
-    bottom: -80px;
-}
-form{
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
-}
-form *{
-    font-family: 'Poppins',sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-}
-form h3{
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SMASH CAR EXPERTS</title>
+    
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Colors - Red Theme */
+            --primary: 0 100% 50%; /* Pure red */
+            --primary-foreground: 0 0% 100%; /* White text on red */
+            --primary-glow: 0 100% 70%; /* Lighter glowing red */
+            --primary-dark: 0 100% 25%; /* Dark red */
 
-label{
-    display: block;
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
-}
-input{
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-}
-::placeholder{
-    color: #e5e5e5;
-}
-button{
-    margin-top: 50px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.social{
-  margin-top: 30px;
-  display: flex;
-}
-.social div{
-  background: red;
-  width: 150px;
-  border-radius: 3px;
-  padding: 5px 10px 10px 5px;
-  background-color: rgba(255,255,255,0.27);
-  color: #eaf0fb;
-  text-align: center;
-}
-.social div:hover{
-  background-color: rgba(255,255,255,0.47);
-}
-.social .fb{
-  margin-left: 25px;
-}
-.social i{
-  margin-right: 4px;
-}
+            /* Background Colors */
+            --background: 0 0% 0%; /* Black background */
+            --foreground: 0 0% 100%; /* White text */
+            --card: 0 0% 5%; /* Dark card background */
+            --card-foreground: 0 0% 100%; /* White card text */
 
+            /* Muted Colors */
+            --muted: 0 0% 15%; /* Dark gray muted bg */
+            --muted-foreground: 0 0% 70%; /* Gray text */
+
+            /* Border and Accent */
+            --border: 0 0% 20%; /* Dark gray border */
+            --accent: 0 100% 30%; /* Deep red accent */
+            --accent-foreground: 0 0% 100%; /* White accent text */
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 30%));
+            --gradient-hero: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 20%));
+            --gradient-subtle: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 100% 15%));
+
+            /* Shadows */
+            --shadow-card: 0 1px 3px 0 rgba(255, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 0, 0, 0.1);
+            --shadow-elegant: 0 10px 25px -5px rgba(255, 0, 0, 0.3), 0 4px 6px -2px rgba(255, 0, 0, 0.2);
+            --shadow-glow: 0 0 25px rgba(255, 0, 0, 0.6);
+
+            /* Animations */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(hsl(var(--primary)), hsl(var(--primary-dark)));
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .background::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(hsl(var(--primary-glow)), hsl(var(--primary)));
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 18s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-20px, 15px) rotate(5deg); }
+            50% { transform: translate(10px, -20px) rotate(-5deg); }
+            75% { transform: translate(15px, 10px) rotate(3deg); }
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .login-card {
+            background-color: hsl(var(--card));
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-elegant);
+            backdrop-filter: blur(10px);
+            border: 1px solid hsl(var(--border));
+            transform: translateY(0);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+            letter-spacing: 1px;
+        }
+
+        .logo p {
+            color: hsl(var(--muted-foreground));
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Form Styling */
+        form {
+            width: 100%;
+        }
+
+        form h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        form h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: hsl(var(--foreground));
+            transition: var(--transition-smooth);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background-color: hsl(var(--muted));
+            border: 2px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            color: hsl(var(--foreground));
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+        }
+
+        .input-group input::placeholder {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 2.6rem;
+            color: hsl(var(--muted-foreground));
+            transition: var(--transition-smooth);
+        }
+
+        .input-group input:focus + .input-icon {
+            color: hsl(var(--primary));
+        }
+
+        /* Button Styling */
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Additional Options */
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input {
+            accent-color: hsl(var(--primary));
+        }
+
+        .forgot-password {
+            color: hsl(var(--primary));
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: hsl(var(--border));
+        }
+
+        .separator span {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .signup-link a {
+            color: hsl(var(--primary));
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Car Animation */
+        .car-animation {
+            position: absolute;
+            bottom: -50px;
+            right: -100px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .car-animation svg {
+            width: 200px;
+            height: auto;
+            animation: drive 20s linear infinite;
+        }
+
+        @keyframes drive {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 200px)) rotate(0deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .car-animation {
+                display: none;
+            }
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: hsl(var(--primary));
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: hsl(var(--primary));
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) + .input-icon + .error-message {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <div class="background"></div>
+    
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <h1>SMASH CAR EXPERTS</h1>
+                <p>Premium Auto Marketplace</p>
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <h3>Welcome Back</h3>
+                
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    <i class='bx bx-user input-icon'></i>
+                    <div class="error-message">Please enter a valid username</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="pass" placeholder="Enter your password" required>
+                    <i class='bx bx-lock-alt input-icon'></i>
+                    <div class="error-message">Password is required</div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class='bx bx-log-in'></i> Sign In
+                </button>
+                
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <div class="separator">
+                    <span>Or</span>
+                </div>
+                
+                <div class="signup-link">
+                    Don't have an account? <a href="{% url 'signup' %}">Create one now</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <form method="post">
-        <h3>Login Here</h3>
-        {% csrf_token %} 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter Username" id="username" name="username">
+    
+    <div class="car-animation">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M5 12C3.89543 12 3 11.1046 3 10V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V10C21 11.1046 20.1046 12 19 12M5 12V15C5 16.1046 5.89543 17 7 17H9M19 12V15C19 16.1046 18.1046 17 17 17H15M9 17C9 18.1046 8.10457 19 7 19C5.89543 19 5 18.1046 5 17C5 15.8954 5.89543 15 7 15C8.10457 15 9 15.8954 9 17ZM19 17C19 18.1046 18.1046 19 17 19C15.8954 19 15 18.1046 15 17C15 15.8954 15.8954 15 17 15C18.1046 15 19 15.8954 19 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="pass">
-
-        <button href= "{% url 'landing_page' %}"type="submit">Log In</button>
-        <!-- <input type="button" value=""> -->
-        <!-- <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div> -->
-        <a href="{% url 'signup' %}" >Create a account</a>
-    </form>
+    <script>
+        // Add interactive effects to form elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            
+            inputs.forEach(input => {
+                // Add focus effect
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                // Remove focus effect
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Check if input has value on page load (for browser autofill)
+                if (input.value !== '') {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+            
+            // Add ripple effect to button
+            const button = document.querySelector('.login-btn');
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+            
+            // Add style for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 </body>
 </html>

@@ -33,12 +33,24 @@ urlpatterns = [
 
 
 
-    path('favorites/<int:car_id>/', views.toggle_favorite, name='toggle_favorite'),
-    path('user/favorites/', views.favorite_cars, name='favorite_cars'),
+    # path('favorites/<int:car_id>/', views.toggle_favorite, name='toggle_favorite'),
+    # path('user/favorites/', views.favorite_cars, name='favorite_cars'),
 
     
     # path('list_car/', views.list_car, name='list_car'),
     # path('success/', views.success, name='success'),
+
+    # path('car-filter/', views.car_filter_view, name='car-filter'),
+    # path('car-filter/', views.car_filter_view, name='car-filter'),
+    # path('market-place/', views.market_place_view, name='market-place'),
+    path('search_cars/', views.search_cars, name='search_cars'),
+
+
+    path('add_to_favorites/<int:car_id>/', views.add_to_favorites, name='add_to_favorites'),
+    # path('remove_from_favorites/<int:car_id>/', views.remove_from_favorites, name='remove_from_favorites'),
+    path('user_account_page/', views.user_account_page, name='user_account_page'),
+    path('toggle_favorite/<int:car_id>/', views.toggle_favorite, name='toggle_favorite'),
+    path('search/', views.car_search_results, name='car_search_results'),
 
 
 ]

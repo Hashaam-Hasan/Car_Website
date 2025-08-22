@@ -1,202 +1,920 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/market_place.css' %}">
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMASH CAR EXPERTS</title>
-    <!-- Boxicons CDN Link -->
+    <title>Marketplace | SMASH CAR EXPERTS</title>
+    
+    <!-- Boxicons -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <!-- Swiper CSS Links -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <meta name="csrf-token" content="{{ csrf_token }}">
+    
+    <style>
+        :root {
+            /* Primary Colors - Red Theme */
+            --primary: 0 100% 50%; /* Pure red */
+            --primary-foreground: 0 0% 100%; /* White text on red */
+            --primary-glow: 0 100% 70%; /* Lighter glowing red */
+            --primary-dark: 0 100% 25%; /* Dark red */
+
+            /* Background Colors */
+            --background: 0 0% 0%; /* Black background */
+            --foreground: 0 0% 100%; /* White text */
+            --card: 0 0% 5%; /* Dark card background */
+            --card-foreground: 0 0% 100%; /* White card text */
+
+            /* Muted Colors */
+            --muted: 0 0% 15%; /* Dark gray muted bg */
+            --muted-foreground: 0 0% 70%; /* Gray text */
+
+            /* Border and Accent */
+            --border: 0 0% 20%; /* Dark gray border */
+            --accent: 0 100% 30%; /* Deep red accent */
+            --accent-foreground: 0 0% 100%; /* White accent text */
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 30%));
+            --gradient-hero: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 100% 20%));
+            --gradient-subtle: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 100% 15%));
+
+            /* Shadows */
+            --shadow-card: 0 1px 3px 0 rgba(255, 0, 0, 0.2), 0 1px 2px 0 rgba(255, 0, 0, 0.1);
+            --shadow-elegant: 0 10px 25px -5px rgba(255, 0, 0, 0.3), 0 4px 6px -2px rgba(255, 0, 0, 0.2);
+            --shadow-glow: 0 0 25px rgba(255, 0, 0, 0.6);
+
+            /* Animations */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            padding: 0.75rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .top-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item, .user-actions a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .contact-item:hover, .user-actions a:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+        
+        .user-social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .social-links a {
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: var(--transition-smooth);
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .profile-circle {
+            width: 2rem;
+            height: 2rem;
+            background-color: hsl(var(--primary-foreground));
+            color: hsl(var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .profile-circle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Navigation */
+        .navigation {
+            background-color: hsl(var(--background));
+            box-shadow: var(--shadow-card);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: hsl(var(--foreground));
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: hsl(var(--primary));
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: hsl(var(--primary));
+        }
+        
+        .add-listing-btn {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+        
+        .add-listing-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Marketplace Hero */
+        .marketplace-hero {
+            background: var(--gradient-hero);
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .marketplace-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .marketplace-hero p {
+            font-size: 1.25rem;
+            color: hsl(var(--muted-foreground));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background-color: hsl(var(--muted));
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-item {
+            margin-bottom: 1rem;
+        }
+
+        .filter-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: hsl(var(--foreground));
+        }
+
+        .filter-select, .filter-input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: hsl(var(--background));
+            border: 2px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            color: hsl(var(--foreground));
+            transition: var(--transition-smooth);
+        }
+
+        .filter-select:focus, .filter-input:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+        }
+
+        .filter-button {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Car Grid */
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .car-card {
+            background-color: hsl(var(--card));
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-elegant);
+        }
+
+        .car-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .car-card:hover .car-image img {
+            transform: scale(1.05);
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: hsla(0, 0%, 0%, 0.7);
+            border: none;
+            color: hsl(var(--foreground));
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .favorite-btn:hover {
+            background-color: hsla(0, 100%, 50%, 0.8);
+            transform: scale(1.1);
+        }
+
+        .favorite-btn.active {
+            background-color: hsl(var(--primary));
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+        }
+
+        .car-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .car-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+            margin: 1rem 0;
+        }
+
+        .car-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .view-details-btn {
+            flex: 1;
+            background: transparent;
+            color: hsl(var(--foreground));
+            border: 2px solid hsl(var(--border));
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .view-details-btn:hover {
+            border-color: hsl(var(--primary));
+            color: hsl(var(--primary));
+        }
+
+        .buy-now-btn {
+            flex: 1;
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .pagination-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            background-color: hsl(var(--muted));
+            border: none;
+            color: hsl(var(--foreground));
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-btn:hover {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+
+        .pagination-btn.active {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-primary);
+            color: hsl(var(--primary-foreground));
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .top-header-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .car-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .marketplace-hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .car-card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .car-card:nth-child(1) { animation-delay: 0.1s; }
+        .car-card:nth-child(2) { animation-delay: 0.2s; }
+        .car-card:nth-child(3) { animation-delay: 0.3s; }
+        .car-card:nth-child(4) { animation-delay: 0.4s; }
+        .car-card:nth-child(5) { animation-delay: 0.5s; }
+        .car-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: hsl(var(--muted-foreground));
+            grid-column: 1 / -1;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Header -->
     <div class="top-header">
-        <div class="out-box">
-            <div class="inside-box">
-                <div class="col-1">
-                    <span class="icon-text"><i class="bx bxl-gmail"></i> info@gmail.com</span>
-                    <span class="icon-text"><i class="bx bx-phone-call"></i> 0332-1234567</span>
-                    <span class="icon-text"><i class="bx bxs-alarm"></i> Mon-Fri (8am-10pm)</span>
+        <div class="container">
+            <div class="top-header-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bx bxl-gmail"></i>
+                        <span>info@smashcarexperts.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bx-phone-call"></i>
+                        <span>0332-1234567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bx bxs-time"></i>
+                        <span>Mon-Fri (8am-10pm)</span>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <a href="#" class="hover-red"><i class="bx bx-arrow-to-right"></i> Login</a>
-                    <a href="#" class="hover-red"><i class="bx bxs-user-circle"></i> Register</a>
+                
+                <div class="user-social">
+                    <div class="user-actions">
+                        <a href="{% url 'login' %}">
+                            <i class="bx bx-log-in"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="{% url 'signup' %}">
+                            <i class="bx bx-user-plus"></i>
+                            <span>Register</span>
+                        </a>
+                    </div>
+                    
+                    <div style="width: 1px; height: 1.5rem; background-color: rgba(255,255,255,0.3);"></div>
+                    
                     <span>Follow us:</span>
-                    <div class="social">
-                        <a href="https://www.facebook.com/"><i class="bx bxl-facebook-square"></i></a>
-                        <a href="#"><i class="bx bxl-instagram"></i></a>
-                        <a href="#"><i class="bx bxl-twitter"></i></a>
-                        <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+                    
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                    </div>
+                    
+                    <div class="user-profile">
+                        {% if user.is_authenticated %}
+                            <!-- Display User Initial -->
+                            <a href="{% url 'user_account_page' %}" class="profile-circle">
+                                {{ user.first_name|slice:":1"|default:"U" }}
+                            </a>
+                        {% else %}
+                            <!-- Redirect to Login Page -->
+                            <a href="{% url 'login' %}" class="profile-circle">
+                                <i class="bx bx-user"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Navbar Section Start -->
-    <header class="header">
-        <div class="logo">
-            <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png' %}" alt="Smash Car Experts Logo">
-        </div>
-        <nav>
-            <div class="navbar">
-                <ul class="navlinks">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="{% url 'about_us' %}">About</a></li>
-                    <li><a href="{% url 'market_place' %}">Market Place</a></li>
-                    <li><a href="{% url 'user_account_page' %}">User Account<i></i></a></li>
-                    <li><a href="{% url 'selling_page' %}">Selling <i></i></a></li>
-                    <li><a href="{% url 'about_us' %}">Blog <i></i></a></li>
-                    <li><a href="{% url 'contribution' %}">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">SMASH CAR EXPERTS</div>
+                
+                <ul class="nav-links">
+                    <li><a href="{% url 'landing_page' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about_us' %}" class="{% if '/about/' in request.path %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}" class="{% if '/marketplace/' in request.path %}active{% endif %}">Market Place</a></li>
+                    <li><a href="{% url 'contribution' %}" class="{% if '/blog/' in request.path %}active{% endif %}">Blog</a></li>
                 </ul>
-            </div>               
-            <div class="others">
-                <i class="bx bx-search"></i>
-                <i class="bx bx-cart-download"></i>
-                <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
-                <i class="bx bx-menu" id="menu-btn"></i>
+                
+                <a href="{% url 'selling_page' %}" class="add-listing-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    Add Listing
+                </a>
             </div>
-        </nav>
-    </header>
-    <main class="marketplace">
-        <h1>Welcome to the Marketplace</h1>
-        <div class="car-list">
+        </div>
+    </nav>
+
+    <!-- Marketplace Hero -->
+    <section class="marketplace-hero">
+        <div class="container">
+            <h1>Premium Car Marketplace</h1>
+            <p>Discover the perfect vehicle from our curated collection of premium cars</p>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="container">
+        <div class="filters-section">
+            <div class="filters-grid">
+                <div class="filter-item">
+                    <label class="filter-label">Brand</label>
+                    <select class="filter-select" id="brand-filter">
+                        <option value="">All Brands</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="honda">Honda</option>
+                        <option value="ford">Ford</option>
+                        <option value="bmw">BMW</option>
+                        <option value="mercedes">Mercedes</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <label class="filter-label">Price Range</label>
+                    <select class="filter-select" id="price-filter">
+                        <option value="">All Prices</option>
+                        <option value="0-10000">Under $10,000</option>
+                        <option value="10000-20000">$10,000 - $20,000</option>
+                        <option value="20000-30000">$20,000 - $30,000</option>
+                        <option value="30000+">$30,000+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <label class="filter-label">Year</label>
+                    <select class="filter-select" id="year-filter">
+                        <option value="">All Years</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <label class="filter-label">Body Type</label>
+                    <select class="filter-select" id="body-type-filter">
+                        <option value="">All Types</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="coupe">Coupe</option>
+                        <option value="hatchback">Hatchback</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <label class="filter-label">Search</label>
+                    <input type="text" class="filter-input" id="search-filter" placeholder="Search cars...">
+                </div>
+                
+                <div class="filter-item" style="display: flex; align-items: flex-end;">
+                    <button class="filter-button" id="apply-filters">
+                        <i class="bx bx-filter"></i>
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Grid -->
+    <section class="container">
+        <div class="car-grid" id="car-list">
             {% for car in cars %}
             <div class="car-card">
                 <div class="car-image">
                     <img src="{{ car.image.url }}" alt="{{ car.title }}">
-                </div>
-                <div class="car-info">
-                    <h2>{{ car.title }}</h2>
-                    <p>Brand Name: {{ car.brand_name }}</p>
-                    <p>Car Model: {{ car.car_model }}</p>
-                    <p>Year: {{ car.model_year }}</p>
-                    <p>Mileage: {{ car.mileage }} km</p>
-                    <p>Body Type: {{ car.body_type }}</p>
-                    <p>Price: ${{ car.price }}</p>
-                     <!-- Heart icon -->
-                    <button class="favorite-button" data-car-id="{{ car.id }}">
-                        <i class="bx bx-heart" id="heart-icon-{{ car.id }}"></i>
+                    <div class="car-badge">{{ car.brand_name }}</div>
+                    <button class="favorite-btn {% if car.id in favorite_car_ids %}active{% endif %}" data-car-id="{{ car.id }}">
+                        <i class="bx {% if car.id in favorite_car_ids %}bxs-heart{% else %}bx-heart{% endif %}" id="heart-icon-{{ car.id }}"></i>
                     </button>
                 </div>
+                
+                <div class="car-info">
+                    <h3 class="car-title">{{ car.title }}</h3>
+                    
+                    <div class="car-details">
+                        <div class="car-detail">
+                            <i class="bx bx-calendar"></i>
+                            <span>{{ car.model_year }}</span>
+                        </div>
+                        <div class="car-detail">
+                            <i class="bx bx-tachometer"></i>
+                            <span>{{ car.mileage }} km</span>
+                        </div>
+                        <div class="car-detail">
+                            <i class="bx bx-category"></i>
+                            <span>{{ car.body_type }}</span>
+                        </div>
+                        <div class="car-detail">
+                            <i class="bx bx-model"></i>
+                            <span>{{ car.car_model }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="car-price">${{ car.price }}</div>
+                    
+                    <div class="car-actions">
+                        <button class="view-details-btn">View Details</button>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-results">
+                <h3>No cars found</h3>
+                <p>Try adjusting your filters or check back later for new listings.</p>
             </div>
             {% endfor %}
-            
-
-
-
-            
         </div>
-    </main>
+        
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn"><i class="bx bx-chevron-left"></i></button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn"><i class="bx bx-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 Smash Car Experts. All rights reserved.</p>
+        </div>
     </footer>
+
+    <script>
+        // Favorite button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const carId = this.getAttribute('data-car-id');
+                    const heartIcon = document.getElementById(`heart-icon-${carId}`);
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    
+                    fetch(`/toggle_favorite/${carId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrfToken,
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_favorite) {
+                            this.classList.add('active');
+                            heartIcon.classList.remove('bx-heart');
+                            heartIcon.classList.add('bxs-heart');
+                        } else {
+                            this.classList.remove('active');
+                            heartIcon.classList.remove('bxs-heart');
+                            heartIcon.classList.add('bx-heart');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+            
+            // Filter functionality
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            const brandFilter = document.getElementById('brand-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const yearFilter = document.getElementById('year-filter');
+            const bodyTypeFilter = document.getElementById('body-type-filter');
+            const searchFilter = document.getElementById('search-filter');
+            const carCards = document.querySelectorAll('.car-card');
+            
+            applyFiltersBtn.addEventListener('click', function() {
+                const brandValue = brandFilter.value.toLowerCase();
+                const priceValue = priceFilter.value;
+                const yearValue = yearFilter.value;
+                const bodyTypeValue = bodyTypeFilter.value.toLowerCase();
+                const searchValue = searchFilter.value.toLowerCase();
+                
+                carCards.forEach(card => {
+                    const carBrand = card.querySelector('.car-badge').textContent.toLowerCase();
+                    const carPrice = parseInt(card.querySelector('.car-price').textContent.replace('$', ''));
+                    const carYear = card.querySelector('.car-detail:nth-child(1) span').textContent;
+                    const carBodyType = card.querySelector('.car-detail:nth-child(3) span').textContent.toLowerCase();
+                    const carTitle = card.querySelector('.car-title').textContent.toLowerCase();
+                    
+                    let matches = true;
+                    
+                    // Brand filter
+                    if (brandValue && !carBrand.includes(brandValue)) {
+                        matches = false;
+                    }
+                    
+                    // Price filter
+                    if (priceValue) {
+                        if (priceValue === '30000+') {
+                            if (carPrice < 30000) matches = false;
+                        } else {
+                            const [min, max] = priceValue.split('-').map(Number);
+                            if (carPrice < min || carPrice > max) matches = false;
+                        }
+                    }
+                    
+                    // Year filter
+                    if (yearValue && carYear !== yearValue) {
+                        matches = false;
+                    }
+                    
+                    // Body type filter
+                    if (bodyTypeValue && !carBodyType.includes(bodyTypeValue)) {
+                        matches = false;
+                    }
+                    
+                    // Search filter
+                    if (searchValue && !carTitle.includes(searchValue)) {
+                        matches = false;
+                    }
+                    
+                    // Show or hide card based on filters
+                    if (matches) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Check if any cards are visible
+                const visibleCards = document.querySelectorAll('.car-card[style="display: block"]');
+                const noResults = document.querySelector('.no-results');
+                
+                if (visibleCards.length === 0 && !noResults) {
+                    const carList = document.getElementById('car-list');
+                    const noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-results';
+                    noResultsDiv.innerHTML = `
+                        <h3>No cars found</h3>
+                        <p>Try adjusting your filters or check back later for new listings.</p>
+                    `;
+                    carList.appendChild(noResultsDiv);
+                } else if (visibleCards.length > 0 && noResults) {
+                    noResults.remove();
+                }
+            });
+            
+            // Add hover effects to cards
+            carCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = 'var(--shadow-elegant)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'var(--shadow-card)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-<script>
-    // Sample car data to simulate API response
-const carData = [
-    {
-        id: 1,
-        make: "Toyota",
-        model: "Camry",
-        year: 2020,
-        image: "https://example.com/toyota_camry.jpg",
-        price: 24000,
-    },
-    {
-        id: 2,
-        make: "Honda",
-        model: "Accord",
-        year: 2021,
-        image: "https://example.com/honda_accord.jpg",
-        price: 26000,
-    },
-    {
-        id: 3,
-        make: "Ford",
-        model: "Mustang",
-        year: 2019,
-        image: "https://example.com/ford_mustang.jpg",
-        price: 30000,
-    },
-];
-
-// Function to display car listings
-function displayCars(cars) {
-    const carList = document.getElementById('carList');
-    carList.innerHTML = ''; // Clear previous listings
-
-    cars.forEach(car => {
-        const carCard = document.createElement('div');
-        carCard.className = 'car-card';
-        carCard.innerHTML = `
-            <div class="car-image">
-                <img src="${car.image}" alt="${car.make} ${car.model}">
-            </div>
-            <div class="car-info">
-                <h2>${car.make} ${car.model}</h2>
-                <p>Year: ${car.year}</p>
-                <p>Brand Name: $${car.price}</p>
-                <p>Car Model: $${car.price}</p>
-                <p>All Years: $${car.price}</p>
-                <p>Choose Milage: $${car.price}</p>
-                <p>Price: $${car.price}</p>
-                <p>Body Type: $${car.price}</p>
-                <button class="buy-button">Buy</button>
-            </div>
-        `;
-        carList.appendChild(carCard);
-    });
-}
-
-// Fetch car data (simulating an API call)
-function fetchCarData() {
-    // Simulating network request
-    setTimeout(() => {
-        displayCars(carData);
-    }, 500);
-}
-
-// Initialize the app
-document.addEventListener('DOMContentLoaded', fetchCarData);
-
-</script>
-
-<script>
-    document.querySelectorAll('.favorite-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const carId = this.getAttribute('data-car-id');
-
-            // Get the CSRF token from the meta tag
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            fetch(`/favorites/${carId}/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken, // Include CSRF token here
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const icon = document.getElementById(`heart-icon-${carId}`);
-                if (data.favorited) {
-                    icon.classList.replace('bx-heart', 'bx-heart-fill');
-                } else {
-                    icon.classList.replace('bx-heart-fill', 'bx-heart');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-
-</script>

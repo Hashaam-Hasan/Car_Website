@@ -1,5 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/cont.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +18,40 @@
     <!-- <link rel="stylesheet" href="cont.css"> -->
 </head>
 <body>
+    <!-- Navbar Section Start -->
+    <header class="header">
+        <div class="logo">
+            <img src="{% static 'E:\MyProjects\carwebsite\car\myapp\static\images\smash car expertsS.png' %}"alt="Smash Car Experts Logo">
+        </div>
+        <nav>
+            <div class="navbar">
+                <ul class="navlinks">
+                    <li><a href="{% url 'landing_page' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'about_us' %}">About</a></li>
+                    <li><a href="{% url 'market_place' %}">Market Place</a></li>
+                   
+                   </li>
+                    
+                    </li>
+                    <li><a href="{% url 'contribution' %}">Blog <i></i></a>
+                      
+                    </li>
+                   
+                </ul>
+            </div>               
+            <div class="others">
+                <!-- Add Listing Button -->
+                <a href="{% url 'selling_page' %}">
+                    <button class="addbtn"><i class="bx bx-plus-circle"></i> Add Listing</button>
+                </a>
+            
+                <!-- User Circle -->
+                
+            </div>
+            
+        </nav>
+    </header>
+
     <section class="team">
         <div class="container">
             <h1>OUR TEAM</h1>
